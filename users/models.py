@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 
 
 class User(AbstractUser):
@@ -23,3 +24,9 @@ class User(AbstractUser):
     )
 
     avatar = models.ImageField(upload_to="uploads/avatars", blank=True)
+
+    exp = models.IntegerField(
+        validators=[
+            MinValueValidator(0),
+        ]
+    )

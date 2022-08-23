@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 
-@admin.register(models.Post)
+@admin.register(models.MyPost)
 class PostAdmin(admin.ModelAdmin):
 
     """Post Admin Definition"""

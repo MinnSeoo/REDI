@@ -12,7 +12,7 @@ class AnswerAdmin(admin.ModelAdmin):
         "context",
     )
     list_filter = ("is_correct",)
-    search_fields = ("question",)
+    search_fields = ("quiz",)
 
 
 @admin.register(models.Quiz)

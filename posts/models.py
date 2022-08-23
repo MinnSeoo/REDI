@@ -15,7 +15,7 @@ class BaseTextModel(models.Model):
     likes = models.IntegerField(validators=[MinValueValidator(0)])
 
 
-class Post(BaseTextModel):
+class MyPost(BaseTextModel):
 
     """Post Model Definition"""
 
@@ -27,4 +27,6 @@ class Comment(BaseTextModel):
 
     """Comment Model Definition"""
 
-    post = models.ForeignKey("Post", related_name="comments", on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        "MyPost", related_name="comments", on_delete=models.CASCADE
+    )

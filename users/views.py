@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def UserHomeView(request):
+
+    """This will be replaced as soon as we create every urls."""
+
+    pass
