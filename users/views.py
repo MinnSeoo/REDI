@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def UserHomeView(request):
+class UserHomeView(TemplateView):
 
-    """This will be replaced as soon as we create every urls."""
+    """
+    This is a home view for those who are logged in.
+    """
 
-    pass
+    template_name = "users/home.html"
