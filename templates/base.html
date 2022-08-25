@@ -7,5 +7,11 @@
         <title>{% block title %}{% endblock title %}</title>
     </head>
 
+    {% include 'partials/header.html' %}
+    
+    {% block content %} {% endblock content %}
+    
+    {% include 'partials/footer.html' %}
+    
     <body></body>
 </html>

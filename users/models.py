@@ -28,5 +28,6 @@ class User(AbstractUser):
     exp = models.IntegerField(
         validators=[
             MinValueValidator(0),
-        ]
+        ],
+        default=0,
     )
