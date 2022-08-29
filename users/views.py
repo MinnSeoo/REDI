@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from . import mixins, forms, models
 
@@ -44,6 +45,7 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
             return reverse("core:home")
 
 
+@login_required
 def log_out(request):
     logout(request)
     return redirect(reverse("users:login"))

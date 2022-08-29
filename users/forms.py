@@ -32,7 +32,7 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = models.User
-        fields = ["email", "username"]
+        fields = ("email", "username")
         widgets = {
             "email": forms.TextInput(attrs={"placeholder": "example@gmail.com"}),
             "username": forms.TextInput(attrs={"placeholder": "RediUser"}),

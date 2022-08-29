@@ -1,0 +1,19 @@
+{
+  "name": "redi",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "css": "gulp"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.8",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
+    "postcss": "^8.4.14",
+    "sass": "^1.45.0",
+    "tailwindcss": "^2.2.19"
+  }
+}

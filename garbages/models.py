@@ -8,7 +8,7 @@ class BaseItem(models.Model):
 
     name = models.CharField(max_length=30, unique=True)
     icon = models.ImageField(upload_to="uploads/icons")
-    discription = models.TextField(blank=True)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -29,6 +29,5 @@ class Garbage(BaseItem):
         ]
     )
     replacements = models.ManyToManyField(
-        "Replacement",
-        related_name="garbages",
+        "Replacement", related_name="garbages", blank=True
     )
