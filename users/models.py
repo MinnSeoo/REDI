@@ -31,3 +31,5 @@ class User(AbstractUser):
         ],
         default=0,
     )
+
+    bio = models.TextField(null=True, blank=True)

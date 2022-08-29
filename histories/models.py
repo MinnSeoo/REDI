@@ -29,6 +29,7 @@ class History(models.Model):
         "users.User", related_name="histories", on_delete=models.CASCADE
     )
     date = models.DateField()
+    memo = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.user.username + " - " + str(self.date)
