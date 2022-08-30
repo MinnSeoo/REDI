@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>유저 디테일</h1>
+    <div class="container h-24 w-24 bg-cover bg-center" style="background-image:url('{{user.avatar.url}}')">
+
+    </div>
+    {{user.username}}<br>
+    {{user.login_method}}<br>
+    {{user.exp}}<br>
+    {{user.bio}}<br>
+
+
+{% endblock content %}
+    
