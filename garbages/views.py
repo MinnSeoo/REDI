@@ -11,7 +11,7 @@ class GarbageListView(mixins.LoggedInOnlyView, ListView):
     model = models.Garbage
     paginate_by = 3
     # paginate_orphans =
-    ordering = "pk"
+    ordering = "-pk"
     context_object_name = "garbages"
 
 

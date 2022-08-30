@@ -2,10 +2,10 @@ from django.contrib import admin
 from . import models
 
 
-@admin.register(models.Item)
-class ItemAdmin(admin.ModelAdmin):
+@admin.register(models.Log)
+class LogAdmin(admin.ModelAdmin):
 
-    """Admin Model Definition"""
+    """Log Admin Definition"""
 
     list_display = ("garbage", "amount", "history")
 
