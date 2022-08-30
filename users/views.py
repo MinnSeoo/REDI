@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from . import mixins, forms, models
@@ -69,3 +69,17 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
         if user.check_password(password):
             login(self.request, user)
         return super().form_valid(form)
+
+
+class UserProfileView(mixins.LoggedInOnlyView, DetailView):
+
+    model = models.User
+    template_name = "users/profile.html"
+
+    def get_object(self, queryset=None):
+        username = self.kwargs.get("username")
+        try:
+            user = models.User.objects.get(username=username)
+            return user
+        except models.User.DoesNotExist:
+            return redirect(reverse("core:home"))
