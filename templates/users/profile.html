@@ -4,9 +4,17 @@
 
 {% block content %}
     <h1>유저 디테일</h1>
-    <div class="container h-24 w-24 bg-cover bg-center" style="background-image:url('{{user.avatar.url}}')">
-
-    </div>
+    
+    {% if request.user.pk == user.pk %}
+        <a href="{% url 'users:edit' user.username %}">정보 수정</a>
+    {% endif %}
+    
+    {% if user.avatar != "" %}
+        <div class="container h-24 w-24 bg-cover bg-center rounded-full" style="background-image:url('{{user.avatar.url}}')"></div>
+    {% else %}
+        <div class="container h-24 w-24 bg-gray-400 rounded-full"></div>
+    {% endif %}
+        
     {{user.username}}<br>
     {{user.login_method}}<br>
     {{user.exp}}<br>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>{{post.title}}</h1>
+    {{post.user}}<br>
+    created : {{post.created}}<br>
+    updated : {{post.updated}}<br>
+    {{post.context}}<br>
+    likes : {{post.likes}}<br>
+
+    
+    {% if post.user.pk == request.user.pk %}
+        <a href="{% url 'posts:delete' post.pk %}">지우기</a>
+        <a href="{% url 'posts:edit' post.pk %}">수정하기</a>
+    {% endif %}
+        
+
+    
+{% endblock content %}
+    
