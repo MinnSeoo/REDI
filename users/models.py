@@ -23,7 +23,7 @@ class User(AbstractUser):
         choices=LOGIN_METHOD_CHOICES, max_length=7, default=EMAIL
     )
 
-    avatar = models.ImageField(upload_to="uploads/avatars", blank=True)
+    avatar = models.ImageField(upload_to="uploads/avatars", blank=True, null=True)
 
     exp = models.IntegerField(
         validators=[

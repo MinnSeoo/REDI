@@ -1,10 +1,11 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.core.validators import MinValueValidator
 
 
-class Item(models.Model):
+class Log(models.Model):
 
-    """History Model Definition"""
+    """Log Model Definition"""
 
     garbage = models.ForeignKey(
         "garbages.Garbage",
@@ -17,8 +18,18 @@ class Item(models.Model):
         ]
     )
     history = models.ForeignKey(
-        "History", related_name="items", on_delete=models.CASCADE
+        "History", related_name="logs", on_delete=models.CASCADE
     )
+
+    def get_absolute_url(self):
+        return reverse(
+            "histories:log-edit",
+            kwargs={
+                "pk": self.history.user.pk,
+                "date": str(self.history.date),
+                "log_pk": self.pk,
+            },
+        )
 
 
 class History(models.Model):
@@ -29,7 +40,12 @@ class History(models.Model):
         "users.User", related_name="histories", on_delete=models.CASCADE
     )
     date = models.DateField()
-    memo = models.CharField(max_length=100, blank=True)
+    memo = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.user.username + " - " + str(self.date)
+
+    def get_absolute_url(self):
+        return reverse(
+            "histories:log", kwargs={"pk": self.user.pk, "date": str(self.date)}
+        )

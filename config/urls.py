@@ -20,5 +20,6 @@ urlpatterns = [
     path("", include("core.urls"), name="core"),
     path("users/", include("users.urls"), name="users"),
     path("garbages/", include("garbages.urls"), name="garbages"),
+    path("histories/", include("histories.urls"), name="histories"),
     path("admin/", admin.site.urls),
 ]
