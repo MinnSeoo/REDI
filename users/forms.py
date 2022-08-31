@@ -61,3 +61,13 @@ class SignUpForm(forms.ModelForm):
         user.email = email
         user.set_password(password)
         user.save()
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = ("avatar", "username", "bio")
+        widgets = {
+            "username": forms.TextInput(attrs={"placeholder": "RediUser"}),
+            "bio": forms.Textarea(attrs={"placeholder": "당신의 소개를 입력하세요"}),
+        }

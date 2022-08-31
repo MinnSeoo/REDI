@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator
 
@@ -23,7 +24,7 @@ class User(AbstractUser):
         choices=LOGIN_METHOD_CHOICES, max_length=7, default=EMAIL
     )
 
-    avatar = models.ImageField(upload_to="uploads/avatars", blank=True, null=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
 
     exp = models.IntegerField(
         validators=[
@@ -33,3 +34,6 @@ class User(AbstractUser):
     )
 
     bio = models.TextField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse("users:profile", kwargs={"username": self.username})

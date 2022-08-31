@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    
+    <h1>퀴즈 풀기</h1>
+    {{quiz.question}}<br>
+    {{quiz.points}}
+
+
+    {% for answer in quiz.get_every_answers %}
+        <a href="{% url 'quizs:check' quiz.pk answer.pk %}">
+            <div>
+                {{answer.context}}
+                {{answer.is_correct}}
+            </div>
+        </a>
+    {% endfor %}
+
+{% endblock content %}

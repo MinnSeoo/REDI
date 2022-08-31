@@ -90,7 +90,7 @@ class LogEditView(mixins.LoggedInOnlyView, UpdateView):
 
     model = models.Log
     context_object_name = "log"
-    form_class = forms.LogEditForm
+    form_class = forms.LogForm
     template_name = "histories/log_edit.html"
 
     def get_success_url(self):

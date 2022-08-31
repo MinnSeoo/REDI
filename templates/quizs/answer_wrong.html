@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    
+    <h1>퀴즈 wrong</h1>
+    {{quiz.question}}<br>
+    {{quiz.points}} 포인트를 얻지 못했습니다.<br>
+
+
+    {% for answer in quiz.get_every_answers %}
+        
+        {% if answer.is_correct %}
+            정답은 {{answer.context}}    
+        {% endif %}
+        </a>
+    {% endfor %}
+
+    <a href="{% url 'quizs:find' %}">퀴즈 더 풀기</a>
+
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    
+    <h1>퀴즈 디테일</h1>
+    {{quiz.question}}<br>
+    {{quiz.points}}<br>
+
+    <a href="{% url 'quizs:edit' quiz.pk %}">퀴즈 수정</a>
+    <a href="{% url 'quizs:delete' quiz.pk %}">퀴즈 삭제</a>
+
+    <a href="{% url 'quizs:add-answer' quiz.pk %}">답 추가</a>
+    {% for answer in quiz.get_every_answers %}
+        <div>
+            {{answer.context}}
+            {{answer.is_correct}}
+            <a href="{% url 'quizs:edit-answer' quiz.pk answer.pk %}" >수정</a>
+            <a href="{% url 'quizs:delete-answer' quiz.pk answer.pk %}" >삭제</a>
+        </div>
+    {% endfor %}
+
+{% endblock content %}

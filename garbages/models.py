@@ -7,7 +7,7 @@ class BaseItem(models.Model):
     """Base Item Definition"""
 
     name = models.CharField(max_length=30, unique=True)
-    icon = models.ImageField(upload_to="uploads/icons")
+    icon = models.ImageField(upload_to="icons")
     description = models.TextField(blank=True)
 
     def __str__(self):

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, FormView, DetailView
+from django.views.generic import TemplateView, FormView, DetailView, UpdateView
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from . import mixins, forms, models
@@ -83,3 +84,34 @@ class UserProfileView(mixins.LoggedInOnlyView, DetailView):
             return user
         except models.User.DoesNotExist:
             return redirect(reverse("core:home"))
+
+
+class UserProfileEditView(mixins.LoggedInOnlyView, UpdateView):
+    model = models.User
+    context_object_name = "user"
+    form_class = forms.UserEditForm
+    template_name = "users/edit.html"
+
+    def get_success_url(self):
+        username = self.kwargs.get("username")
+        user = models.User.objects.get(username=username)
+        return user.get_absolute_url()
+
+    def get_object(self):
+        user = models.User.objects.get(username=self.kwargs["username"])
+        return user
+
+
+class UserPasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
+
+    template_name = "users/update_password.html"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["old_password"].widget.attrs = {"placeholder": "현재 비밀번호"}
+        form.fields["new_password1"].widget.attrs = {"placeholder": "새 비밀번호"}
+        form.fields["new_password2"].widget.attrs = {"placeholder": "비밀번호 확인"}
+        return form
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()
