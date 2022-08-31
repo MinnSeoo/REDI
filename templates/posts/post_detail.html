@@ -12,9 +12,25 @@
 
     
     {% if post.user.pk == request.user.pk %}
-        <a href="{% url 'posts:delete' post.pk %}">지우기</a>
+        <a href="{% url 'posts:post-delete' post.pk %}">지우기</a>
         <a href="{% url 'posts:edit' post.pk %}">수정하기</a>
     {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <button>comment</button>
+    </form>
+    
+    {% for comment in post.comments.all %}
+        <div>
+            {{comment.user}} - {{comment.context}} 
+            {% if request.user == comment.user %}
+                <a href="{% url 'posts:comment-delete' post.pk comment.pk %}">지우기</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+        
         
 
     

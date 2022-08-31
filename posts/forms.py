@@ -2,10 +2,7 @@ from django import forms
 from . import models
 
 
-# 두 개를 하나로 합쳐도 될 듯
-
-
-class PostAddForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = models.MyPost
         fields = ("title", "context", "picture")
@@ -14,10 +11,10 @@ class PostAddForm(forms.ModelForm):
         return super().save(commit=False)
 
 
-class PostUpdateForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = models.MyPost
-        fields = ("title", "context", "picture")
+        model = models.Comment
+        fields = ("context",)
 
     def save(self, *args, **kwargs):
         return super().save(commit=False)
