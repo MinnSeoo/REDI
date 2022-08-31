@@ -27,3 +27,4 @@ class Quiz(models.Model):
 
     def get_absolute_url(self):
         return reverse("quizs:detail", kwargs={"pk": self.pk})
+

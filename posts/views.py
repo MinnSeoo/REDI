@@ -12,12 +12,12 @@ class PostListView(mixins.LoggedInOnlyView, ListView):
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "posts"
-    template_name = "posts/list.html"
+    template_name = "posts/post_list.html"
 
 
 class PostAddView(mixins.LoggedInOnlyView, FormView):
 
-    form_class = forms.PostAddForm
+    form_class = forms.PostForm
     template_name = "posts/post_add.html"
 
     def form_valid(self, form):
@@ -30,11 +30,39 @@ class PostAddView(mixins.LoggedInOnlyView, FormView):
         return redirect(post.get_absolute_url())
 
 
-class PostDetailView(mixins.LoginRequiredMixin, DetailView):
+class PostDetailView(mixins.LoginRequiredMixin, FormView):
 
-    model = models.MyPost
+    model = models.Comment
+    form_class = forms.CommentForm
     template_name = "posts/post_detail.html"
-    context_object_name = "post"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get("pk")
+        context["post"] = models.MyPost.objects.get(pk=pk)
+        return context
+
+    def get_success_url(self):
+        return reverse(
+            "posts:detail",
+            kwargs={"pk": self.kwargs.get("pk")},
+        )
+
+    def form_valid(self, form):
+
+        comment = form.save()
+        comment.user = self.request.user
+        pk = self.kwargs.get("pk")
+        post = models.MyPost.objects.get(pk=pk)
+        comment.post = post
+        comment.save()
+        return super().form_valid(form)
+
+
+@login_required
+def comment_delete(request, post_pk, comment_pk):
+    models.Comment.objects.get(pk=comment_pk).delete()
+    return redirect(reverse("posts:detail", kwargs={"pk": post_pk}))
 
 
 @login_required
@@ -47,7 +75,7 @@ class PostEditView(mixins.LoggedInOnlyView, UpdateView):
 
     model = models.MyPost
     context_object_name = "post"
-    form_class = forms.PostUpdateForm
+    form_class = forms.PostForm
     template_name = "posts/post_update.html"
 
     def form_valid(self, form):
