@@ -25,6 +25,7 @@ urlpatterns = [
     path("garbages/", include("garbages.urls"), name="garbages"),
     path("histories/", include("histories.urls"), name="histories"),
     path("posts/", include("posts.urls"), name="posts"),
+    path("quizs/", include("quizs.urls"), name="quizs"),
     path("admin/", admin.site.urls),
 ]
 

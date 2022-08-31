@@ -1,8 +1,6 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.http import Http404
-from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
