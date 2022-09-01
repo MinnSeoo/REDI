@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, reverse
-from django.views.generic import ListView, FormView, DetailView, UpdateView
+from django.views.generic import ListView, FormView, UpdateView
 from users import mixins
 from . import models, forms
 
@@ -89,3 +89,23 @@ class PostEditView(mixins.LoggedInOnlyView, UpdateView):
     def get_object(self):
         post = models.MyPost.objects.get(pk=self.kwargs["pk"])
         return post
+
+
+def toggle_post_like(request, pk):
+    post = models.MyPost.objects.get(pk=pk)
+
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    return redirect(reverse("posts:detail", kwargs={"pk": pk}))
+
+
+def toggle_comment_like(request, pk):
+    comment = models.Comment.objects.get(pk=pk)
+
+    if request.user in comment.likes.all():
+        comment.likes.remove(request.user)
+    else:
+        comment.likes.add(request.user)
+    return redirect(reverse("posts:detail", kwargs={"pk": comment.post.pk}))

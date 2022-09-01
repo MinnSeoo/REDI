@@ -8,5 +8,6 @@
     <a href="{% url 'garbages:delete' garbage.pk %}">지우기</a>
     {{garbage.name}}
 
+    <a href="{% url 'garbages:list' %}">쓰레기 정보</a>
 {% endblock content %}
     

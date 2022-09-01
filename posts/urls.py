@@ -14,4 +14,10 @@ urlpatterns = [
         name="comment-delete",
     ),
     path("<int:pk>/edit/", views.PostEditView.as_view(), name="edit"),
+    path("<int:pk>/toggle_post_like/", views.toggle_post_like, name="toggle-post-like"),
+    path(
+        "<int:pk>/toggle_comment_like/",
+        views.toggle_comment_like,
+        name="toggle-comment-like",
+    ),
 ]
