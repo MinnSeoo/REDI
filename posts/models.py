@@ -13,7 +13,10 @@ class BaseTextModel(models.Model):
     context = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    likes = models.ManyToManyField("users.User", related_name="likes", blank=True)
+
+    def get_likes(self):
+        return self.likes.count()
 
 
 class MyPost(BaseTextModel):
