@@ -3,7 +3,6 @@ from django.db.models import Q
 from django.views.generic import TemplateView, DetailView, FormView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, reverse
-from django.urls import reverse_lazy
 from django.http import Http404
 from users import mixins
 from . import forms, models
@@ -11,6 +10,11 @@ from . import forms, models
 
 class HistorySummaryView(mixins.LoggedInOnlyView, TemplateView):
     template_name = "histories/histories_home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user"] = self.request.user
+        return context
 
 
 def create(request):

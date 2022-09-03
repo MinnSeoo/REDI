@@ -69,6 +69,7 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
         user = models.User.objects.get(email=email)
         if user.check_password(password):
             login(self.request, user)
+        user.verify_email()
         return super().form_valid(form)
 
 
@@ -115,3 +116,14 @@ class UserPasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
 
     def get_success_url(self):
         return self.request.user.get_absolute_url()
+
+
+def complete_verification(request, secret):
+    try:
+        user = models.User.objects.get(email_secret=secret)
+        user.email_verified = True
+        user.email_secret = ""
+        user.save()
+    except models.User.DoesNotExist:
+        pass
+    return redirect(reverse("core:home"))

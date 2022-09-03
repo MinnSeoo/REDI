@@ -3,15 +3,15 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>일회용품 정보</h1>
+    <h1>대체품 정보</h1>
     
     {% if user.is_superuser %}
-        <a href ="{% url 'garbages:gb-add' %}">일회용품 추가</a>
+        <a href ="{% url 'garbages:rm-add' %}">대체품 추가</a>
     {% endif %}
         
 
-    {% for garbage in garbages %}
-        <a href="{% url 'garbages:gb-detail' garbage.pk %}">{{garbage.name}}</a><br>
+    {% for replacement in replacements %}
+        <a href="{% url 'garbages:rm-detail' replacement.pk %}">{{replacement.name}}</a><br>
     {% endfor %}
 
     {% if page_obj.has_previous %}
