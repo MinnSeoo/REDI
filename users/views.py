@@ -127,3 +127,15 @@ def complete_verification(request, secret):
     except models.User.DoesNotExist:
         pass
     return redirect(reverse("core:home"))
+
+
+class PasswordResetView(mixins.LoggedOutOnlyView, FormView):
+
+    form_class = forms.ResetPasswordForm
+    template_name = "users/reset_password.html"
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get("email")
+        user = models.User.objects.get(email=email)
+        user.reset_password()
+        return redirect(reverse("core:success", kwargs={"name": "reset-password"}))

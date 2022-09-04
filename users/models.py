@@ -62,6 +62,20 @@ class User(AbstractUser):
             send_email.content_subtype = "html"
             send_email.send()
 
+    def reset_password(self):
+        password = uuid.uuid4().hex[:10].upper()
+        self.set_password(password)
+        self.save()
+        mail_subject = "REDI - 비밀번호 초기화"
+        message = render_to_string(
+            "email/password_reset.html",
+            {"name": self.username, "password": password},
+        )
+        to_email = self.email
+        send_email = EmailMessage(mail_subject, message, to=[to_email])
+        send_email.content_subtype = "html"
+        send_email.send()
+
     def get_calender(self):
         now = datetime.now()
         calendar = Calendar(now.year, now.month)
