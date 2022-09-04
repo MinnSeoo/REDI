@@ -60,7 +60,7 @@ def get_history(obj):
 
 class LogAddView(mixins.LoggedInOnlyView, FormView):
 
-    form_class = forms.LogAddForm
+    form_class = forms.LogForm
     template_name = "histories/log_add.html"
 
     def get_success_url(self):
@@ -102,6 +102,11 @@ class LogEditView(mixins.LoggedInOnlyView, UpdateView):
             "histories:log",
             kwargs={"pk": self.kwargs.get("pk"), "date": self.kwargs.get("date")},
         )
+
+    def form_valid(self, form):
+        log = form.save()
+        log.save()
+        return super().form_valid(form)
 
     def get_object(self):
         log = models.Log.objects.get(pk=self.kwargs["log_pk"])

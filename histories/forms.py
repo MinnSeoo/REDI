@@ -8,8 +8,6 @@ class LogForm(forms.ModelForm):
         amount = forms.IntegerField(min_value=1)
         fields = ("garbage", "amount")
 
-
-class LogAddForm(LogForm):
     def save(self):
         log = super().save(commit=False)
         return log

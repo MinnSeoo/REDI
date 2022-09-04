@@ -81,7 +81,12 @@ class ResetPasswordForm(forms.Form):
     def clean(self):
         email = self.cleaned_data.get("email")
         try:
-            models.User.objects.get(email=email)
-            return self.cleaned_data
+            user = models.User.objects.get(email=email)
+            if user.login_method != models.User.EMAIL:
+                self.add_error(
+                    "email", forms.ValidationError("User's login method is not email")
+                )
+            else:
+                return self.cleaned_data
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("User does not exist"))
