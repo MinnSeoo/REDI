@@ -71,3 +71,22 @@ class UserEditForm(forms.ModelForm):
             "username": forms.TextInput(attrs={"placeholder": "RediUser"}),
             "bio": forms.Textarea(attrs={"placeholder": "당신의 소개를 입력하세요"}),
         }
+
+
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"placeholder": "example@gmail.com"})
+    )
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        try:
+            user = models.User.objects.get(email=email)
+            if user.login_method != models.User.EMAIL:
+                self.add_error(
+                    "email", forms.ValidationError("User's login method is not email")
+                )
+            else:
+                return self.cleaned_data
+        except models.User.DoesNotExist:
+            self.add_error("email", forms.ValidationError("User does not exist"))
