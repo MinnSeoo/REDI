@@ -17,13 +17,11 @@ class User(AbstractUser):
 
     EMAIL = "email"
     KAKAO = "kakao"
-    GOOGLE = "google"
     DISCORD = "discord"
 
     LOGIN_METHOD_CHOICES = (
         (EMAIL, "Email"),
         (KAKAO, "Kakao"),
-        (GOOGLE, "Google"),
         (DISCORD, "Discord"),
     )
 
