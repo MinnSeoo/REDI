@@ -6,6 +6,11 @@ class LoginForm(forms.Form):
 
     """email과 password를 작성하는 form"""
 
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields["email"].label = "이메일"
+        self.fields["password"].label = "비밀번호"
+
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={"placeholder": "example@gmail.com"})
     )
@@ -37,6 +42,13 @@ class SignUpForm(forms.ModelForm):
             "email": forms.TextInput(attrs={"placeholder": "example@gmail.com"}),
             "username": forms.TextInput(attrs={"placeholder": "RediUser"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        self.fields["email"].label = "이메일"
+        self.fields["username"].label = "닉네임"
+        self.fields["password"].label = "비밀번호"
+        self.fields["password1"].label = "비밀번호 확인"
 
     password = forms.CharField(widget=forms.PasswordInput())
     password1 = forms.CharField(widget=forms.PasswordInput())
@@ -71,12 +83,17 @@ class UserEditForm(forms.ModelForm):
             "username": forms.TextInput(attrs={"placeholder": "RediUser"}),
             "bio": forms.Textarea(attrs={"placeholder": "당신의 소개를 입력하세요"}),
         }
+        labels = {"avatar": "프로필 사진", "username": "닉네임", "bio": "자기소개"}
 
 
 class ResetPasswordForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={"placeholder": "example@gmail.com"})
     )
+
+    def __init__(self, *args, **kwargs):
+        super(ResetPasswordForm, self).__init__(*args, **kwargs)
+        self.fields["email"].label = "이메일"
 
     def clean(self):
         email = self.cleaned_data.get("email")

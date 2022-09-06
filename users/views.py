@@ -7,7 +7,6 @@ from django.views.generic import TemplateView, FormView, DetailView, UpdateView
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
-from django.core.files.base import ContentFile
 from . import mixins, forms, models
 
 
@@ -113,9 +112,9 @@ class UserPasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["old_password"].widget.attrs = {"placeholder": "현재 비밀번호"}
-        form.fields["new_password1"].widget.attrs = {"placeholder": "새 비밀번호"}
-        form.fields["new_password2"].widget.attrs = {"placeholder": "비밀번호 확인"}
+        form.fields["old_password"].label = "기존 비밀번호"
+        form.fields["new_password1"].label = "새 비밀번호"
+        form.fields["new_password2"].label = "비밀번호 확인"
         return form
 
     def get_success_url(self):
