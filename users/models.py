@@ -7,6 +7,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 import uuid
 
+from core.models import CustomModelImageField
 from core.cal import Calendar
 from datetime import datetime
 
@@ -29,7 +30,7 @@ class User(AbstractUser):
         choices=LOGIN_METHOD_CHOICES, max_length=7, default=EMAIL
     )
 
-    avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
+    avatar = CustomModelImageField(upload_to="avatars", blank=True, null=True)
 
     exp = models.IntegerField(
         validators=[

@@ -6,7 +6,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = models.MyPost
         fields = ("title", "context", "picture")
-        labels = {"title": "제목", "context": "내용", "picture": "첨부할 사진"}
+        labels = {"title": "제목", "context": "내용", "picture": "사진 첨부"}
 
     def save(self, *args, **kwargs):
         return super().save(commit=False)
