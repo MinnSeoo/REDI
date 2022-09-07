@@ -79,3 +79,6 @@ class User(AbstractUser):
         now = datetime.now()
         calendar = Calendar(now.year, now.month)
         return calendar
+
+    def get_histories(self):
+        return self.histories.order_by("date")

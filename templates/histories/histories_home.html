@@ -3,59 +3,38 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-{% load is_created %}
-    <script type="text/javascript">
-        function setDate(date){
-            document.getElementById("date").value = date;
-        }
-    </script>
-    <div>
-        {{user.get_calender.year}}년 {{user.get_calender.month}}월
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<div class="flex h-full">
+    <div class="w-3/5 my-14">
+        {% include 'mixins/chart.html' %}
     </div>
-    <div>
-        {% for weekday in user.get_calender.day_names %}
-            {{weekday}} 
-        {% endfor %}
-    </div>
-    <form  method="GET" action="{% url 'histories:create' %}">
-        <div class="grid gap-2 justify-items-center grid-cols-7">
-            
-            {% for day in user.get_calender.get_days %}
-                
-                {% if day.number != 0 %}
-                    {% if day.past %}
-                        {% is_created user day as is_created_bool %}
-                        {% if is_created_bool %}
-                            <button type="button" onclick="setDate('{{day.date}}');" class=
-                            "
-                            bg-gray-100 w-full text-center rounded text-gray-300 p-1 line-through focus:ring focus:ring-gray-300
-                            ">
-                                {{day}}
-                            </button>
-                        {% else %}
-                            <button type="button" onclick="setDate('{{day.date}}');" class=
-                            "
-                            bg-gray-200 w-full text-center rounded text-gray-700 p-1 
-                            hover:bg-teal-300 hover:text-white cursor-pointer focus:outline-none focus:ring focus:ring-gray-300
-                            ">
-                                {{day}}
-                            </button>
-                        {% endif %}
-                    {% else %}
-                        <span class="bg-gray-200 w-full text-center rounded text-gray-300 p-1">
-                            {{day}}
-                        </span>
-                    {% endif %}
-                    
-                {% else %}
-                    <span></span>
-                {% endif %}
-                    
-            {% endfor %}
-                
+    <div class="w-2/5 h-full px-10 ml-10 my-14">
+        <script type="text/javascript">
+            function setDate(date){
+                document.getElementById("date").value = date;
+            }
+        </script>
+        <div>
+            {{user.get_calender.year}}년 {{user.get_calender.month}}월
         </div>
-        <input type="hidden" name="date" value="" id="date">
-        <button type="submit">제출</button>
-    </form>
+        <div>
+            {% for weekday in user.get_calender.day_names %}
+                {{weekday}} 
+            {% endfor %}
+        </div>
+        <form  method="GET" action="{% url 'histories:create' %}">
+            <div class="grid gap-2 justify-items-center grid-cols-7">
+                
+                {% for day in user.get_calender.get_days %}
+                    {% include 'mixins/cal_button.html' %}
+                {% endfor %}
+                
+            </div>
+            <input type="hidden" name="date" value="" id="date">
+            <button type="submit">제출</button>
+        </form>
+    </div>
+</div>
+    
 {% endblock content %}
     

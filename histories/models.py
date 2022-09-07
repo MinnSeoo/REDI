@@ -32,6 +32,9 @@ class Log(models.Model):
         )
 
 
+import random
+
+
 class History(models.Model):
 
     """History Model Definition"""
@@ -49,3 +52,6 @@ class History(models.Model):
         return reverse(
             "histories:log", kwargs={"pk": self.user.pk, "date": str(self.date)}
         )
+
+    def random_value(self):
+        return random.randint(1, 50)
