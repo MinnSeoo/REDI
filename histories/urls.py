@@ -21,6 +21,7 @@ historypatterns = [
 
 urlpatterns = [
     path("home/", views.HistorySummaryView.as_view(), name="home"),
+    path("list/", views.HistoryListView.as_view(), name="list"),
     path("create/", views.create, name="create"),
     path("log/<int:pk>/<str:date>/", include(historypatterns)),
 ]

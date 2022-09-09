@@ -21,6 +21,9 @@ class Log(models.Model):
         "History", related_name="logs", on_delete=models.CASCADE
     )
 
+    def get_total_value(self):
+        return self.garbage.value * self.amount
+
     def get_absolute_url(self):
         return reverse(
             "histories:log-edit",
@@ -30,9 +33,6 @@ class Log(models.Model):
                 "log_pk": self.pk,
             },
         )
-
-
-import random
 
 
 class History(models.Model):
@@ -53,5 +53,9 @@ class History(models.Model):
             "histories:log", kwargs={"pk": self.user.pk, "date": str(self.date)}
         )
 
-    def random_value(self):
-        return random.randint(1, 50)
+    def get_total_value(self):
+        logs = self.logs.all()
+        sum = 0
+        for log in logs:
+            sum += log.get_total_value()
+        return sum

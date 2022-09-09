@@ -1,6 +1,12 @@
 import datetime
 from django.db.models import Q
-from django.views.generic import TemplateView, DetailView, FormView, UpdateView
+from django.views.generic import (
+    TemplateView,
+    DetailView,
+    FormView,
+    UpdateView,
+    ListView,
+)
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, reverse
 from django.http import Http404
@@ -18,12 +24,27 @@ class HistorySummaryView(mixins.LoggedInOnlyView, TemplateView):
         return context
 
 
+class HistoryListView(mixins.LoggedInOnlyView, ListView):
+    model = models.History
+    paginate_by = 30
+    # paginate_orphans =
+    ordering = "-date"
+    context_object_name = "histories"
+    template_name = "histories/histories_list.html"
+
+    def get_queryset(self):
+        return models.History.objects.filter(user=self.request.user)
+
+
 def create(request):
     user = request.user
     date = request.GET.get("date")
     if date == "":
         return redirect(reverse("histories:home"))
-    history = models.History.objects.create(user=user, date=date)
+    try:
+        history = models.History.objects.get(user=user, date=date)
+    except models.History.DoesNotExist:
+        history = models.History.objects.create(user=user, date=date)
     return redirect(history.get_absolute_url())
 
 

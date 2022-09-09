@@ -8,7 +8,7 @@ const myChart = new Chart(ctx, {
         datasets: [{
             fill: 'origin',
             label: '수치',
-            data: [{% for history in histories %}{{history.random_value}},{% endfor %}],
+            data: [{% for history in histories %}{{history.get_total_value}},{% endfor %}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)'
             ],
@@ -38,17 +38,10 @@ const myChart = new Chart(ctx, {
             legend: {
                 display: false
             },
-            title: {
-                display: true,
-                text: '        님의 통계',
-                align: 'start',
-                font: {
-                    size: 30
-                },
-                padding: {
-                    bottom: '20'
-                }
-            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'nearest'
         }
     }
 });

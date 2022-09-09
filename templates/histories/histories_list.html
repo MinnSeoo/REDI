@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+
+    <div class=" mt-24 pt-5 flex flex-col mb-12">
+        <h2 class="text-center border border-gray-300 w-80 mx-auto text-2xl font-semibold text-gray-500 bg-gray-100 py-2 rounded-r-full rounded-l-full">{{request.user}}님의 기록</h2>
+        
+        <div class="w-32 mx-auto flex justify-center mt-8">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">
+                pre
+            </a>
+            {% endif %}
+            
+            <span class="">{{page_obj.number}} / {{page_obj.paginator.num_pages}}</span>
+            
+            {% if page_obj.has_next  %}
+            <a href="?page={{page_obj.next_page_number}}">
+               next
+            </a>
+            {% endif %}
+        </div>
+
+        <table class="mt-8 mx-12 rounded-t-3xl overflow-hidden mb-10">
+            <thead class="bg-indigo-50 h-16 border-b border-white">
+                <td class="pl-5">
+                    날짜
+                </td>
+                <td>
+                    
+                </td>
+            </thead>
+            <tbody class="divide-y-2 divide-white bg-gray-50">
+                {% for history in histories %}
+                    <tr class="h-24 ">
+                        <td class="pl-5">
+                            {{history.date}}
+                        </td>
+                        <td>
+                            <a href="{% url 'histories:log' history.pk history.date %}">
+                                <span class="border p-2">
+                                    세부정보 보기
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}
+    
