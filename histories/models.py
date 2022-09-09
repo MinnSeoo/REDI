@@ -59,3 +59,10 @@ class History(models.Model):
         for log in logs:
             sum += log.get_total_value()
         return sum
+
+    def get_garbage_amount(self):
+        logs = self.logs.all()
+        sum = 0
+        for log in logs:
+            sum += log.amount
+        return sum

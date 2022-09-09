@@ -26,9 +26,9 @@ class HistorySummaryView(mixins.LoggedInOnlyView, TemplateView):
 
 class HistoryListView(mixins.LoggedInOnlyView, ListView):
     model = models.History
-    paginate_by = 30
+    paginate_by = 15
     # paginate_orphans =
-    ordering = "-date"
+    ordering = "date"
     context_object_name = "histories"
     template_name = "histories/histories_list.html"
 
@@ -36,6 +36,7 @@ class HistoryListView(mixins.LoggedInOnlyView, ListView):
         return models.History.objects.filter(user=self.request.user)
 
 
+@login_required
 def create(request):
     user = request.user
     date = request.GET.get("date")
@@ -46,6 +47,12 @@ def create(request):
     except models.History.DoesNotExist:
         history = models.History.objects.create(user=user, date=date)
     return redirect(history.get_absolute_url())
+
+
+@login_required
+def history_delete(request, pk, date):
+    models.History.objects.get(pk=pk).delete()
+    return redirect(reverse("histories:list"))
 
 
 class HistoryLogsView(mixins.LoggedInOnlyView, DetailView):
@@ -63,10 +70,19 @@ class HistoryLogsView(mixins.LoggedInOnlyView, DetailView):
         context = super().get_context_data(**kwargs)
         date = self.kwargs.get("date")
         history = get_history(self)
+        context["form"] = forms.MemoForm(instance=history)
         context["logs"] = history.logs.all()
         context["pk"] = self.kwargs.get("pk")
         context["date"] = date
         return context
+
+    def post(self, request, pk, date):
+        history = self.get_object()
+        form = forms.MemoForm(request.POST)
+        if form.is_valid():
+            history.memo = form.cleaned_data.get("memo")
+            history.save()
+            return redirect(reverse("histories:log", kwargs={"pk": pk, "date": date}))
 
 
 def get_history(obj):

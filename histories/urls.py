@@ -7,6 +7,7 @@ app_name = "histories"
 historypatterns = [
     path("", views.HistoryLogsView.as_view(), name="log"),
     path("add/", views.LogAddView.as_view(), name="add"),
+    path("delete/", views.history_delete, name="delete"),
     path(
         "<int:log_pk>/delete",
         views.log_delete,

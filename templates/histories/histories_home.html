@@ -8,7 +8,7 @@
     <div class="w-3/5 my-12">
         <div class="flex justify-between pr-20 -mt-5">
             <h2 class="pl-20 text-3xl font-semibold font-sans border-2 border-gray-200 py-2 mb-3 pr-20 rounded-r-3xl" style="background-color: rgb(256,253,250)">{{user.username}}님의 통계</h2>
-            <a href="{% url 'histories:list' %}" class="border hover:border-gray-400 duration-150 transform hover:scale-105 mt-7 -mb-4 p-1 text-sm w-40 h-7 text-gray-500 bg-gray-100 text-center rounded-l-full rounded-r-full">모든 기록 보기</a>
+            <a href="{% url 'histories:list' %}" class="border hover:border-gray-400 duration-150 transform hover:scale-105 mt-7 -mb-4 p-1 text-sm w-40 h-7 text-gray-500 bg-gray-100 text-center rounded-full">모든 기록 보기</a>
         </div>
         {% include 'mixins/chart.html' %}
     </div>
@@ -24,7 +24,7 @@
         <form  method="GET" action="{% url 'histories:create' %}">
             <div class="flex">
                 <div class="w-3/5 p-2">
-                    <div class="text-center mb-2 rounded-r-full rounded-l-full bg-purple-50">
+                    <div class="text-center mb-2 rounded-full bg-purple-50">
                         {{user.get_calender.year}}년 {{user.get_calender.month}}월
                     </div>
                     <div class="text-xs mb-2 grid gap-2 justify-items-center grid-cols-7 border-b pb-2">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="border-l h-2/5 flex justify-center items-center">
-                        <button type="submit" class="w-5/6 h-2/5 mb-3 rounded-l-full rounded-r-full bg-blue-100 transform hover:bg-blue-50 hover:-translate-y-2 hover:scale-110 duration-150 ring ring-indigo-200 font-bold text-blue-800">기록하기</button>
+                        <button type="submit" class="w-5/6 h-2/5 mb-3 rounded-l-full rounded-r-full bg-blue-100 transform hover:bg-blue-50 hover:-translate-y-1 hover:scale-110 duration-150 ring ring-indigo-200 font-bold text-blue-800">기록하기</button>
                     </div>
                 </div>
             </div>
