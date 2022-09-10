@@ -96,10 +96,12 @@ class UserProfileEditView(mixins.LoggedInOnlyView, UpdateView):
     form_class = forms.UserEditForm
     template_name = "users/edit.html"
 
-    def get_success_url(self):
-        username = self.kwargs.get("username")
-        user = models.User.objects.get(username=username)
-        return user.get_absolute_url()
+    def get_success_url(self, username):
+        return redirect(reverse("users:profile", kwargs={"username": username}))
+
+    def form_valid(self, form):
+        username = form.save()
+        return self.get_success_url(username=username)
 
     def get_object(self):
         user = models.User.objects.get(username=self.kwargs["username"])

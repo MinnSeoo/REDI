@@ -2,6 +2,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -24,6 +25,17 @@ class User(AbstractUser):
         (EMAIL, "Email"),
         (KAKAO, "Kakao"),
         (DISCORD, "Discord"),
+    )
+
+    username = models.CharField(
+        "username",
+        max_length=30,
+        unique=True,
+        help_text=("30글자 혹은 그 이하의 문자, 숫자, 그리고 ( @ . + - _ )만 가능합니다."),
+        validators=[UnicodeUsernameValidator],
+        error_messages={
+            "unique": "닉네임이 이미 사용중입니다.",
+        },
     )
 
     login_method = models.CharField(

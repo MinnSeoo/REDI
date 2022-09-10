@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="mt-24 pt-10 flex flex-col">
-        <h2 class=" text-center border border-gray-300 w-80 mx-auto text-2xl font-semibold text-gray-500 bg-gray-100 py-2 rounded-3xl">{{request.user}}님의 기록</h2>
+        <h2 class="text-center border border-gray-300 w-auto px-6 mx-auto text-2xl font-semibold text-gray-500 bg-gray-100 py-2 rounded-3xl flex justify-center"><span class="max-w-xs block truncate mr-3">{{request.user.username}}</span>님의 기록</h2>
         <div class="flex items-center">
             <a href="{% url 'histories:home' %}" class="w-36 mt-8 -mb-8 ml-28 transform hover:scale-110 duration-150">
                 <span class="py-1 px-5 rounded-xl bg-yellow-50 ring-2 ring-yellow-100 font-bold text-gray-500">
@@ -51,40 +51,47 @@
                 </td>
             </thead>
             <tbody class="divide-y-2 divide-white bg-gray-50">
-                {% for history in histories %}
-                    <tr class="h-24">
-                        <td class="pl-7 w-52">
-                            {{history.date}}
-                        </td>
-                        <td class="w-32">
-                            {{history.get_total_value}}
-                        </td>
-                        <td class="w-32">
-                            {{history.get_garbage_amount}}
-                        </td>
-                        <td class="my-8 block truncate w-96">
-                            {% if history.memo %}
-                                {{history.memo}}  
-                            {% else %}
-                                <p class="text-gray-200">메모가 없습니다.</p>
-                            {% endif %}
-                        </td>
-                        <td class="w-52">
-                            <a href="{% url 'histories:log' history.pk history.date %}">
-                                <span class=" py-2 px-4 rounded-3xl hover:bg-blue-300 duration-100 bg-blue-100 hover:text-gray-50 hover:shadow-md">
-                                    세부정보 보기
-                                </span>
-                            </a>
-                        </td>
-                        <td class="w-42">
-                            <a href="{% url 'histories:delete' history.pk history.date %}">
-                                <span class="py-2 px-4 rounded-3xl hover:bg-pink-300 duration-100 bg-pink-100 hover:text-gray-50 hover:shadow-md">
-                                    삭제하기
-                                </span>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
+                
+                {% if histories %}
+                    {% for history in histories %}
+                        <tr class="h-24">
+                            <td class="pl-7 w-52">
+                                {{history.date}}
+                            </td>
+                            <td class="w-32">
+                                {{history.get_total_value}}
+                            </td>
+                            <td class="w-32">
+                                {{history.get_garbage_amount}}
+                            </td>
+                            <td class="my-8 block truncate w-96">
+                                {% if history.memo %}
+                                    {{history.memo}}  
+                                {% else %}
+                                    <p class="text-gray-200">메모가 없습니다.</p>
+                                {% endif %}
+                            </td>
+                            <td class="w-52">
+                                <a href="{% url 'histories:log' history.pk history.date %}">
+                                    <span class=" py-2 px-4 rounded-3xl hover:bg-blue-300 duration-100 bg-blue-100 hover:text-gray-50 hover:shadow-md">
+                                        세부정보 보기
+                                    </span>
+                                </a>
+                            </td>
+                            <td class="w-42">
+                                <a href="{% url 'histories:delete' history.pk history.date %}">
+                                    <span class="py-2 px-4 rounded-3xl hover:bg-pink-300 duration-100 bg-pink-100 hover:text-gray-50 hover:shadow-md">
+                                        삭제하기
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="6" class="h-32 text-center text-gray-200 text-3xl">기록이 없습니다</td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
         <div class="w-56 mx-auto flex justify-center mt-8  mb-16">

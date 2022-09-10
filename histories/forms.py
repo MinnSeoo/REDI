@@ -19,7 +19,7 @@ class MemoForm(forms.ModelForm):
         model = models.History
         memo = forms.CharField(max_length=100)
         fields = ("memo",)
-        label = {"memo": "한줄 메모"}
+        labels = {"memo": "한줄 메모"}
         widgets = {
             "memo": forms.TextInput(attrs={"placeholder": "메모를 적어주세요"}),
         }

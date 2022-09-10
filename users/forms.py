@@ -37,6 +37,7 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = models.User
+        username = forms.CharField(max_length=30)
         fields = ("email", "username")
         widgets = {
             "email": forms.TextInput(attrs={"placeholder": "example@gmail.com"}),
@@ -78,6 +79,7 @@ class SignUpForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = models.User
+        username = forms.CharField(max_length=30)
         fields = ("avatar", "username", "bio")
         widgets = {
             "username": forms.TextInput(attrs={"placeholder": "RediUser"}),
