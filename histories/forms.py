@@ -17,9 +17,8 @@ class LogForm(forms.ModelForm):
 class MemoForm(forms.ModelForm):
     class Meta:
         model = models.History
-        memo = forms.CharField(max_length=100)
         fields = ("memo",)
-        labels = {"memo": "한줄 메모"}
+        labels = {"memo": "하루 메모"}
         widgets = {
-            "memo": forms.TextInput(attrs={"placeholder": "메모를 적어주세요"}),
+            "memo": forms.Textarea(attrs={"placeholder": "메모를 적어주세요"}),
         }
