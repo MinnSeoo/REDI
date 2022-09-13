@@ -1,12 +1,12 @@
 import os
 import requests
+from requests.exceptions import SSLError
 from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView, DetailView, UpdateView
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
-from django.core.files.base import ContentFile
 from . import mixins, forms, models
 
 
@@ -96,10 +96,12 @@ class UserProfileEditView(mixins.LoggedInOnlyView, UpdateView):
     form_class = forms.UserEditForm
     template_name = "users/edit.html"
 
-    def get_success_url(self):
-        username = self.kwargs.get("username")
-        user = models.User.objects.get(username=username)
-        return user.get_absolute_url()
+    def get_success_url(self, username):
+        return redirect(reverse("users:profile", kwargs={"username": username}))
+
+    def form_valid(self, form):
+        username = form.save()
+        return self.get_success_url(username=username)
 
     def get_object(self):
         user = models.User.objects.get(username=self.kwargs["username"])
@@ -112,9 +114,9 @@ class UserPasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["old_password"].widget.attrs = {"placeholder": "현재 비밀번호"}
-        form.fields["new_password1"].widget.attrs = {"placeholder": "새 비밀번호"}
-        form.fields["new_password2"].widget.attrs = {"placeholder": "비밀번호 확인"}
+        form.fields["old_password"].label = "기존 비밀번호"
+        form.fields["new_password1"].label = "새 비밀번호"
+        form.fields["new_password2"].label = "비밀번호 확인"
         return form
 
     def get_success_url(self):
@@ -180,7 +182,6 @@ def kakao_callback(request):
             raise KakaoException()
         properties = profile_json.get("properties")
         username = properties.get("nickname")
-        profile_image = kakao_account.get("profile").get("profile_image_uri")
         try:
             user = models.User.objects.get(email=email)
             if user.login_method != models.User.KAKAO:
@@ -194,12 +195,75 @@ def kakao_callback(request):
             )
             user.set_unusable_password()
             user.save()
-            if profile_image is not None:
-                photo_request = requests.get(profile_image)
-                user.avatar.save(
-                    f"{username}-avatar", ContentFile(photo_request.content)
-                )
         login(request, user)
         return redirect(reverse("core:home"))
     except KakaoException:
         return redirect(reverse("users:login"))
+
+
+def discord_login(request):
+    client_id = os.environ.get("DISCORD_ID")
+    redirect_uri = "http://127.0.0.1:8000/users/login/discord/callback"
+    return redirect(
+        f"https://discord.com/oauth2/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&prompt=consent&scope=identify%20email"
+    )
+
+
+class DiscordException(Exception):
+    pass
+
+
+def discord_callback(request):
+    try:
+        code = request.GET.get("code")
+        token_json = exchange_code(code)
+        if token_json is not None:
+            access_token = token_json["access_token"]
+            response = requests.get(
+                "https://discord.com/api/v10/users/@me",
+                headers={"Authorization": f"Bearer {access_token}"},
+            )
+            user_json = response.json()
+            username = user_json["username"]
+            email = user_json["email"]
+            try:
+                user = models.User.objects.get(email=email)
+                if user.login_method != models.User.DISCORD:
+                    raise DiscordException()
+            except models.User.DoesNotExist:
+                user = models.User.objects.create(
+                    email=email,
+                    username=username,
+                    login_method=models.User.DISCORD,
+                    email_verified=True,
+                )
+                user.set_unusable_password()
+                user.save()
+            login(request, user)
+            return redirect(reverse("core:home"))
+        else:
+            raise DiscordException()
+    except DiscordException:
+        return redirect(reverse("users:login"))
+
+
+def exchange_code(code):
+    try:
+        redirect_uri = "http://127.0.0.1:8000/users/login/discord/callback"
+        client_id = os.environ.get("DISCORD_ID")
+        client_secret = os.environ.get("DISCORD_SECRET")
+        data = {
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": redirect_uri,
+        }
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        r = requests.post(
+            "https://discord.com/api/oauth2/token", data=data, headers=headers
+        )
+        r.raise_for_status()
+        return r.json()
+    except SSLError:
+        return None

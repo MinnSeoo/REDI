@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator
+from core.models import CustomModelImageField
 from django.shortcuts import reverse
 
 
@@ -24,7 +24,7 @@ class MyPost(BaseTextModel):
     """Post Model Definition"""
 
     title = models.CharField(max_length=50)
-    picture = models.ImageField(upload_to="post_pics", blank=True)
+    picture = CustomModelImageField(upload_to="post_pics", blank=True)
 
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"pk": self.pk})

@@ -21,6 +21,9 @@ class Log(models.Model):
         "History", related_name="logs", on_delete=models.CASCADE
     )
 
+    def get_total_value(self):
+        return self.garbage.value * self.amount
+
     def get_absolute_url(self):
         return reverse(
             "histories:log-edit",
@@ -40,7 +43,7 @@ class History(models.Model):
         "users.User", related_name="histories", on_delete=models.CASCADE
     )
     date = models.DateField()
-    memo = models.CharField(max_length=100, blank=True, null=True)
+    memo = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username + " - " + str(self.date)
@@ -49,3 +52,17 @@ class History(models.Model):
         return reverse(
             "histories:log", kwargs={"pk": self.user.pk, "date": str(self.date)}
         )
+
+    def get_total_value(self):
+        logs = self.logs.all()
+        sum = 0
+        for log in logs:
+            sum += log.get_total_value()
+        return sum
+
+    def get_garbage_amount(self):
+        logs = self.logs.all()
+        sum = 0
+        for log in logs:
+            sum += log.amount
+        return sum
