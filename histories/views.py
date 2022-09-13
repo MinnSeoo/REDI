@@ -1,6 +1,12 @@
 import datetime
 from django.db.models import Q
-from django.views.generic import TemplateView, DetailView, FormView, UpdateView
+from django.views.generic import (
+    TemplateView,
+    DetailView,
+    FormView,
+    UpdateView,
+    ListView,
+)
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, reverse
 from django.http import Http404
@@ -14,16 +20,39 @@ class HistorySummaryView(mixins.LoggedInOnlyView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user"] = self.request.user
+        context["histories"] = self.request.user.get_histories()
         return context
 
 
+class HistoryListView(mixins.LoggedInOnlyView, ListView):
+    model = models.History
+    paginate_by = 15
+    # paginate_orphans =
+    ordering = "date"
+    context_object_name = "histories"
+    template_name = "histories/histories_list.html"
+
+    def get_queryset(self):
+        return models.History.objects.filter(user=self.request.user)
+
+
+@login_required
 def create(request):
     user = request.user
     date = request.GET.get("date")
     if date == "":
         return redirect(reverse("histories:home"))
-    history = models.History.objects.create(user=user, date=date)
+    try:
+        history = models.History.objects.get(user=user, date=date)
+    except models.History.DoesNotExist:
+        history = models.History.objects.create(user=user, date=date)
     return redirect(history.get_absolute_url())
+
+
+@login_required
+def history_delete(request, pk, date):
+    models.History.objects.get(pk=pk).delete()
+    return redirect(reverse("histories:list"))
 
 
 class HistoryLogsView(mixins.LoggedInOnlyView, DetailView):
@@ -41,10 +70,19 @@ class HistoryLogsView(mixins.LoggedInOnlyView, DetailView):
         context = super().get_context_data(**kwargs)
         date = self.kwargs.get("date")
         history = get_history(self)
+        context["form"] = forms.MemoForm(instance=history)
         context["logs"] = history.logs.all()
         context["pk"] = self.kwargs.get("pk")
         context["date"] = date
         return context
+
+    def post(self, request, pk, date):
+        history = self.get_object()
+        form = forms.MemoForm(request.POST)
+        if form.is_valid():
+            history.memo = form.cleaned_data.get("memo")
+            history.save()
+            return redirect(reverse("histories:log", kwargs={"pk": pk, "date": date}))
 
 
 def get_history(obj):

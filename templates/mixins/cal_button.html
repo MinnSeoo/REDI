@@ -1,0 +1,29 @@
+{% load is_created %}
+{% if day.number != 0 %}
+    {% if day.past %}
+        {% is_created user day as is_created_bool %}
+        {% if is_created_bool %}
+            <button type="button" onclick="setDate('{{day.date}}');" class=
+            "
+             text-xs bg-green-50 w-full text-center rounded text-gray-300 p-1 transform hover:scale-125 hover:bg-green-100 hover:text-gray-600 line-through focus:ring focus:ring-green-200 duration-100
+            ">
+                {{day}}
+            </button>
+        {% else %}
+            <button type="button" onclick="setDate('{{day.date}}');" class=
+            "
+            text-xs bg-gray-100 w-full text-center rounded text-gray-700 p-1 
+            transform hover:scale-125 hover:bg-gray-200 cursor-pointer focus:outline-none focus:ring focus:ring-gray-300 duration-100
+            ">
+                {{day}}
+            </button>
+        {% endif %}
+    {% else %}
+        <span class="text-xs bg-gray-200 w-full text-center rounded text-gray-300 p-1">
+            {{day}}
+        </span>
+    {% endif %}
+    
+{% else %}
+    <span></span>
+{% endif %}
