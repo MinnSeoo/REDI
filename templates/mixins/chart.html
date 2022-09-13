@@ -21,7 +21,12 @@ const myChart = new Chart(ctx, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+            },
+            x:{
+                ticks:{
+                    display:false
+                }
             }
         },
         layout: {
