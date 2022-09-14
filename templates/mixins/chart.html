@@ -22,10 +22,16 @@ const myChart = new Chart(ctx, {
         scales: {
             y: {
                 beginAtZero: true,
+                grid: {
+                    color: "rgba(245, 245, 245, 50)",
+                }
             },
             x:{
                 ticks:{
                     display:false
+                },
+                grid: {
+                    color: "rgba(245, 245, 245, 50)",
                 }
             }
         },

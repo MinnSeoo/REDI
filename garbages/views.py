@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView, FormView, UpdateView
 from django.shortcuts import redirect, reverse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from users import mixins
@@ -47,6 +48,7 @@ class GarbageAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView
         garbage = form.save()
         garbage.save()
         form.save_m2m()
+        messages.success(self.request, "쓰레기를 추가했습니다!")
         return super().form_valid(form)
 
 
@@ -62,6 +64,7 @@ class ReplacementAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, Form
 
         replacement = form.save()
         replacement.save()
+        messages.success(self.request, "대체품을 추가했습니다!")
         return super().form_valid(form)
 
 
@@ -70,6 +73,7 @@ class ReplacementAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, Form
 def delete_garbage(request, pk):
     garbage = models.Garbage.objects.get(pk=pk)
     garbage.delete()
+    messages.success(request, "쓰레기를 삭제했습니다!")
     return redirect(reverse("garbages:gb-list"))
 
 
@@ -77,6 +81,7 @@ def delete_garbage(request, pk):
 def delete_replacement(request, pk):
     replacement = models.Replacement.objects.get(pk=pk)
     replacement.delete()
+    messages.success(request, "대체품을 삭제했습니다!")
     return redirect(reverse("garbages:rm-list"))
 
 
@@ -95,6 +100,7 @@ class GarbageEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateV
         garbage = form.save()
         garbage.save()
         form.save_m2m()
+        messages.success(self.request, "쓰레기를 수정했습니다!")
         return super().form_valid(form)
 
     def get_object(self):
@@ -118,6 +124,7 @@ class ReplacementEditView(
 
         replacement = form.save()
         replacement.save()
+        messages.success(self.request, "대체품을 수정했습니다!")
         return super().form_valid(form)
 
     def get_object(self):

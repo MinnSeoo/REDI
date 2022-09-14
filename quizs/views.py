@@ -8,6 +8,7 @@ from django.views.generic import (
     UpdateView,
     ListView,
 )
+from django.contrib import messages
 from users import mixins
 from . import models, forms
 
@@ -69,9 +70,9 @@ class QuizAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView):
     form_class = forms.QuizForm
 
     def form_valid(self, form):
-
         quiz = form.save()
         quiz.save()
+        messages.success(self.request, "퀴즈를 추가했습니다!")
         return redirect(reverse("quizs:detail", kwargs={"pk": quiz.pk}))
 
 
@@ -83,10 +84,10 @@ class QuizEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateView
     template_name = "quizs/quiz_edit.html"
 
     def form_valid(self, form):
-
         quiz = form.save()
         quiz.save()
         pk = self.kwargs.get("pk")
+        messages.success(self.request, "퀴즈를 수정했습니다!")
         return redirect(reverse("quizs:detail", kwargs={"pk": pk}))
 
     def get_object(self):
@@ -98,6 +99,7 @@ class QuizEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateView
 def delete_quiz(request, pk):
     quiz = models.Quiz.objects.get(pk=pk)
     quiz.delete()
+    messages.success(request, "퀴즈를 제거했습니다!")
     return redirect(reverse("quizs:list"))
 
 
@@ -127,11 +129,11 @@ class AnswerAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView)
     form_class = forms.AnswerForm
 
     def form_valid(self, form):
-
         answer = form.save()
         pk = self.kwargs.get("pk")
         answer.quiz = models.Quiz.objects.get(pk=pk)
         answer.save()
+        messages.success(self.request, "답변을 추가했습니다!")
         return redirect(reverse("quizs:detail", kwargs={"pk": pk}))
 
 
@@ -143,10 +145,10 @@ class AnswerEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateVi
     template_name = "quizs/answer_edit.html"
 
     def form_valid(self, form):
-
         answer = form.save()
         answer.save()
         pk = self.kwargs.get("quiz_pk")
+        messages.success(self.request, "답변을 수정했습니다!")
         return redirect(reverse("quizs:detail", kwargs={"pk": pk}))
 
     def get_object(self):
@@ -158,4 +160,5 @@ class AnswerEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateVi
 def delete_answer(request, quiz_pk, answer_pk):
     answer = models.Answer.objects.get(pk=answer_pk)
     answer.delete()
+    messages.success(request, "답변을 제거했습니다!")
     return redirect(reverse("quizs:detail", kwargs={"pk": quiz_pk}))
