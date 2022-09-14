@@ -7,6 +7,7 @@ from django.views.generic import (
     UpdateView,
     ListView,
 )
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, reverse
 from django.http import Http404
@@ -41,17 +42,20 @@ def create(request):
     user = request.user
     date = request.GET.get("date")
     if date == "":
+        messages.warning(request, "날짜를 선택해주세요")
         return redirect(reverse("histories:home"))
     try:
         history = models.History.objects.get(user=user, date=date)
     except models.History.DoesNotExist:
         history = models.History.objects.create(user=user, date=date)
+        messages.info(request, "기록이 생성되었습니다")
     return redirect(history.get_absolute_url())
 
 
 @login_required
 def history_delete(request, pk, date):
     models.History.objects.get(pk=pk).delete()
+    messages.info(request, "기록이 제거되었습니다")
     return redirect(reverse("histories:list"))
 
 
@@ -113,6 +117,7 @@ class LogAddView(mixins.LoggedInOnlyView, FormView):
         history = get_history(self)
         log.history = history
         log.save()
+        messages.success(self.request, "세부기록을 추가했습니다.")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -125,6 +130,7 @@ class LogAddView(mixins.LoggedInOnlyView, FormView):
 @login_required
 def log_delete(request, pk, date, log_pk):
     models.Log.objects.get(pk=log_pk).delete()
+    messages.success(request, "세부기록을 제거했습니다.")
     return redirect(reverse("histories:log", kwargs={"pk": pk, "date": date}))
 
 
@@ -144,6 +150,7 @@ class LogEditView(mixins.LoggedInOnlyView, UpdateView):
     def form_valid(self, form):
         log = form.save()
         log.save()
+        messages.success(self.request, "세부기록을 수정했습니다.")
         return super().form_valid(form)
 
     def get_object(self):

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, reverse
 from django.views.generic import ListView, FormView, UpdateView
+from django.contrib import messages
 from users import mixins
 from . import models, forms
 
@@ -27,6 +28,7 @@ class PostAddView(mixins.LoggedInOnlyView, FormView):
         post = form.save()
         post.user = self.request.user
         post.save()
+        messages.success(self.request, "글이 올려졌습니다!")
         return redirect(post.get_absolute_url())
 
 
@@ -56,18 +58,21 @@ class PostDetailView(mixins.LoginRequiredMixin, FormView):
         post = models.MyPost.objects.get(pk=pk)
         comment.post = post
         comment.save()
+        messages.success(self.request, "댓글을 달았습니다!")
         return super().form_valid(form)
 
 
 @login_required
 def comment_delete(request, post_pk, comment_pk):
     models.Comment.objects.get(pk=comment_pk).delete()
+    messages.success(request, "댓글을 삭제했습니다!")
     return redirect(reverse("posts:detail", kwargs={"pk": post_pk}))
 
 
 @login_required
 def post_delete(request, pk):
     models.MyPost.objects.get(pk=pk).delete()
+    messages.success(request, "글을 삭제했습니다!")
     return redirect(reverse("posts:home"))
 
 
@@ -84,6 +89,7 @@ class PostEditView(mixins.LoggedInOnlyView, UpdateView):
 
         post = form.save()
         post.save()
+        messages.success(self.request, "글을 수정했습니다!")
         return redirect(post.get_absolute_url())
 
     def get_object(self):

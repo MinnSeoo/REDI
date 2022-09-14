@@ -1,0 +1,13 @@
+
+{% if messages %}
+    
+    {% for message in messages %}
+        
+        <div class="fixed z-50 {% if message.tags %}{{message.tags}}{% endif %}">
+            {{message}}
+        </div>
+
+    {% endfor %}
+        
+{% endif %}
+    
