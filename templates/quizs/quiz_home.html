@@ -5,12 +5,8 @@
 {% block content %}
     <h1>퀴즈 메인</h1>
     <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>
-
-    
-    {% if request.user.is_superuser %}
-        <a href="{% url 'quizs:add' %}">퀴즈 추가</a>
-        <a href="{% url 'quizs:list' %}" >퀴즈 리스트</a>
-    {% endif %}
+    <a href="{% url 'quizs:add' %}">퀴즈 추가</a>
+    <a href="{% url 'quizs:list' %}" >퀴즈 리스트</a>
         
     
 

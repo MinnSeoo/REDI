@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, FormView, UpdateView
 from django.shortcuts import redirect, reverse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse_lazy
 from users import mixins
 from . import models, forms
@@ -35,7 +35,7 @@ class ReplacementDetailView(mixins.LoggedInOnlyView, DetailView):
     model = models.Replacement
 
 
-class GarbageAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView):
+class GarbageAddView(mixins.SuperUserOnlyView, FormView):
 
     template_name = "garbages/garbage_add.html"
     form_class = forms.GarbageForm
@@ -52,7 +52,7 @@ class GarbageAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView
         return super().form_valid(form)
 
 
-class ReplacementAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView):
+class ReplacementAddView(mixins.SuperUserOnlyView, FormView):
 
     template_name = "garbages/replacement_add.html"
     form_class = forms.ReplacementForm
@@ -68,8 +68,8 @@ class ReplacementAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, Form
         return super().form_valid(form)
 
 
-# superuser_required decorator로 superuser만 이 화면을 볼 수 있도록 해야 함
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_garbage(request, pk):
     garbage = models.Garbage.objects.get(pk=pk)
     garbage.delete()
@@ -78,6 +78,7 @@ def delete_garbage(request, pk):
 
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_replacement(request, pk):
     replacement = models.Replacement.objects.get(pk=pk)
     replacement.delete()
@@ -85,7 +86,7 @@ def delete_replacement(request, pk):
     return redirect(reverse("garbages:rm-list"))
 
 
-class GarbageEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateView):
+class GarbageEditView(mixins.SuperUserOnlyView, UpdateView):
 
     model = models.Garbage
     context_object_name = "garbage"
@@ -108,9 +109,7 @@ class GarbageEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateV
         return garbage
 
 
-class ReplacementEditView(
-    mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateView
-):
+class ReplacementEditView(mixins.SuperUserOnlyView, UpdateView):
 
     model = models.Replacement
     context_object_name = "replacement"

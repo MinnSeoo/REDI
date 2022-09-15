@@ -1,6 +1,6 @@
 from random import choice
 from django.shortcuts import redirect, reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic import (
     TemplateView,
     DetailView,
@@ -17,6 +17,7 @@ class QuizHomeView(mixins.LoggedInOnlyView, TemplateView):
     template_name = "quizs/quiz_home.html"
 
 
+@login_required
 def find_quiz(request):
     quiz = choice(list(models.Quiz.objects.all()))
     return redirect(reverse("quizs:solve", kwargs={"pk": quiz.pk}))
@@ -34,6 +35,7 @@ class QuizSolveView(mixins.LoggedInOnlyView, DetailView):
         return quiz
 
 
+@login_required
 def check_answer(request, quiz_pk, answer_pk):
     quiz = models.Quiz.objects.get(pk=quiz_pk)
     answer = models.Answer.objects.get(pk=answer_pk)
@@ -64,7 +66,7 @@ class WrongAnswerView(AnswerCheckBaseView):
     template_name = "quizs/answer_wrong.html"
 
 
-class QuizAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView):
+class QuizAddView(mixins.SuperUserOnlyView, FormView):
 
     template_name = "quizs/quiz_add.html"
     form_class = forms.QuizForm
@@ -76,7 +78,7 @@ class QuizAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView):
         return redirect(reverse("quizs:detail", kwargs={"pk": quiz.pk}))
 
 
-class QuizEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateView):
+class QuizEditView(mixins.SuperUserOnlyView, UpdateView):
 
     model = models.Quiz
     context_object_name = "quiz"
@@ -103,7 +105,7 @@ def delete_quiz(request, pk):
     return redirect(reverse("quizs:list"))
 
 
-class QuizListView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, ListView):
+class QuizListView(mixins.SuperUserOnlyView, ListView):
     model = models.Quiz
     paginate_by = 3
     # paginate_orphans =
@@ -111,7 +113,7 @@ class QuizListView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, ListView):
     context_object_name = "quizs"
 
 
-class QuizDetailView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, DetailView):
+class QuizDetailView(mixins.SuperUserOnlyView, DetailView):
 
     model = models.Quiz
     template_name = "quizs/quiz_detail.html"
@@ -123,7 +125,7 @@ class QuizDetailView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, DetailVi
         return quiz
 
 
-class AnswerAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView):
+class AnswerAddView(mixins.SuperUserOnlyView, FormView):
 
     template_name = "quizs/answer_add.html"
     form_class = forms.AnswerForm
@@ -137,7 +139,7 @@ class AnswerAddView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, FormView)
         return redirect(reverse("quizs:detail", kwargs={"pk": pk}))
 
 
-class AnswerEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateView):
+class AnswerEditView(mixins.SuperUserOnlyView, UpdateView):
 
     model = models.Answer
     context_object_name = "answer"
@@ -157,6 +159,7 @@ class AnswerEditView(mixins.LoggedInOnlyView, mixins.SuperUserOnlyView, UpdateVi
 
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_answer(request, quiz_pk, answer_pk):
     answer = models.Answer.objects.get(pk=answer_pk)
     answer.delete()
