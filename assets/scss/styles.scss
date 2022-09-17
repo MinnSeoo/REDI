@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 
+
 .memo {
     textarea {
         @apply h-14 rounded-lg resize-none px-2 py-1 border border-gray-200 overflow-hidden;
