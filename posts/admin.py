@@ -9,7 +9,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_display = (
         "user",
-        "likes",
+        "get_likes",
         "title",
     )
     search_fields = ("user", "context")
@@ -22,7 +22,7 @@ class CommentAdmin(admin.ModelAdmin):
 
     list_display = (
         "user",
-        "likes",
+        "get_likes",
         "post",
     )
     search_fields = ("user", "context")

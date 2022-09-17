@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>{{post.title}}</h1>
+    {{post.user}}<br>
+    created : {{post.created}}<br>
+    updated : {{post.updated}}<br>
+    {{post.context}}<br>
+    likes : {{post.get_likes}}<br>
+
+    <a href="{% url 'posts:toggle-post-like' post.pk %}">
+        {% if request.user in post.likes.all %}
+        remove like
+        {% else %}
+        give like
+        {% endif %}
+    </a>
+        
+
+    
+    {% if post.user.pk == request.user.pk %}
+        <a href="{% url 'posts:post-delete' post.pk %}">지우기</a>
+        <a href="{% url 'posts:edit' post.pk %}">수정하기</a>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            {{field}}
+        {% endfor %}
+            
+        <button>comment</button>
+    </form>
+    
+    {% for comment in post.comments.all %}
+        <div>
+            <a href="{% url 'users:profile' comment.user.username %}">{{comment.user}}</a> - {{comment.context}} 
+            {% if request.user == comment.user %}
+                <a href="{% url 'posts:comment-delete' post.pk comment.pk %}">지우기</a>
+            {% endif %}
+            <a href="{% url 'posts:toggle-comment-like' comment.pk %}" >좋아요</a> : {{comment.likes.count}}
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'posts:home' %}">커뮤니티</a>
+        
+{% endblock content %}
+    

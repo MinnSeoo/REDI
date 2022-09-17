@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>쓰레기 디테일</h1>
+    <a href="{% url 'garbages:gb-update' garbage.pk %}">수정하기</a>
+    <a href="{% url 'garbages:gb-delete' garbage.pk %}">지우기</a>
+    {{garbage.name}}
+
+    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+{% endblock content %}
+    

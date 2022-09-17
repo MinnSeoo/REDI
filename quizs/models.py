@@ -1,5 +1,6 @@
 from random import shuffle
 from django.db import models
+from django.shortcuts import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -20,4 +21,10 @@ class Quiz(models.Model):
         return self.question
 
     def get_every_answers(self):
-        return shuffle(self.answers.all())
+        my_list = list(self.answers.all())
+        shuffle(my_list)
+        return my_list
+
+    def get_absolute_url(self):
+        return reverse("quizs:detail", kwargs={"pk": self.pk})
+

@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from core.models import CustomModelImageField
 
 
 class BaseItem(models.Model):
@@ -7,8 +8,8 @@ class BaseItem(models.Model):
     """Base Item Definition"""
 
     name = models.CharField(max_length=30, unique=True)
-    icon = models.ImageField(upload_to="uploads/icons")
-    discription = models.TextField(blank=True)
+    icon = CustomModelImageField(upload_to="icons")
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -29,6 +30,5 @@ class Garbage(BaseItem):
         ]
     )
     replacements = models.ManyToManyField(
-        "Replacement",
-        related_name="garbages",
+        "Replacement", related_name="garbages", blank=True
     )

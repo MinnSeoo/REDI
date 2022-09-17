@@ -1,5 +1,6 @@
 from django.db import models
-from django.core.validators import MinValueValidator
+from core.models import CustomModelImageField
+from django.shortcuts import reverse
 
 
 class BaseTextModel(models.Model):
@@ -12,7 +13,10 @@ class BaseTextModel(models.Model):
     context = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(validators=[MinValueValidator(0)])
+    likes = models.ManyToManyField("users.User", related_name="likes", blank=True)
+
+    def get_likes(self):
+        return self.likes.count()
 
 
 class MyPost(BaseTextModel):
@@ -20,7 +24,10 @@ class MyPost(BaseTextModel):
     """Post Model Definition"""
 
     title = models.CharField(max_length=50)
-    picture = models.ImageField(upload_to="uploads/post_pics", blank=True)
+    picture = CustomModelImageField(upload_to="post_pics", blank=True)
+
+    def get_absolute_url(self):
+        return reverse("posts:detail", kwargs={"pk": self.pk})
 
 
 class Comment(BaseTextModel):

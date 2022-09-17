@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>커뮤니티</h1>
+    
+    <a href ="{% url 'posts:add' %}">글 쓰기</a>
+        
+
+    {% for post in posts %}
+        <a href="{% url 'posts:detail' post.pk %}">{{post.title}}</a><br>
+    {% endfor %}
+
+    {% if page_obj.has_previous %}
+         <a href="?page={{page_obj.previous_page_number}}">
+            pre
+        </a>
+    {% endif %}
+
+    <span >{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">
+           next
+        </a>
+    {% endif %}
+
+{% endblock content %}
+    
