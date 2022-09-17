@@ -22,7 +22,7 @@ class LoggedInOnlyView(LoginRequiredMixin):
     login_url = reverse_lazy("users:login")
 
 
-class SuperUserOnlyView(UserPassesTestMixin):
+class SuperUserOnlyView(LoggedInOnlyView, UserPassesTestMixin):
 
     """user가 superuser가 아니면 404 에러"""
 

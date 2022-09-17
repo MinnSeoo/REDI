@@ -55,7 +55,7 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
 @login_required
 def log_out(request):
     logout(request)
-    messages.info(request, "다음에 봐요!")
+    messages.info(request, "다음에 봐요 :)")
     return redirect(reverse("users:login"))
 
 
@@ -107,7 +107,7 @@ class UserProfileEditView(mixins.LoggedInOnlyView, UpdateView):
 
     def form_valid(self, form):
         username = form.save()
-        messages.success(self.request, "성공적으로 정보를 변경했습니다!")
+        messages.success(self.request, "프로필 정보를 변경했습니다!")
         return self.get_success_url(username=username)
 
     def get_object(self):
