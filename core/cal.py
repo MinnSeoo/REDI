@@ -8,6 +8,7 @@ class Day:
         self.past = past
         self.month = month
         self.year = year
+        self.date = f"{year}-{month:0>2}-{number:0>2}"
 
     def __str__(self):
         return str(self.number)
@@ -28,18 +29,18 @@ class Calendar(calendar.Calendar):
             "토",
         )
         self.months = (
-            "1월",
-            "2월",
-            "3월",
-            "4월",
-            "5월",
-            "6월",
-            "7월",
-            "8월",
-            "9월",
-            "10월",
-            "11월",
-            "12월",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
         )
 
     def get_days(self):
@@ -54,7 +55,12 @@ class Calendar(calendar.Calendar):
                 if month == self.month:
                     if day <= today:
                         past = True
-                new_day = Day(number=day, past=past, month=self.month, year=self.year)
+                new_day = Day(
+                    number=day,
+                    past=past,
+                    month=self.month,
+                    year=self.year,
+                )
                 days.append(new_day)
         return days
 

@@ -6,12 +6,12 @@
     <h1>일회용품 정보</h1>
     
     {% if user.is_superuser %}
-        <a href ="{% url 'garbages:add' %}">일회용품 추가</a>
+        <a href ="{% url 'garbages:gb-add' %}">일회용품 추가</a>
     {% endif %}
         
 
     {% for garbage in garbages %}
-        <a href="{% url 'garbages:detail' garbage.pk %}">{{garbage.name}}</a><br>
+        <a href="{% url 'garbages:gb-detail' garbage.pk %}">{{garbage.name}}</a><br>
     {% endfor %}
 
     {% if page_obj.has_previous %}

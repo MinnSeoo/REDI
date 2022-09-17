@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>대체품 정보</h1>
+    
+    {% if user.is_superuser %}
+        <a href ="{% url 'garbages:rm-add' %}">대체품 추가</a>
+    {% endif %}
+        
+
+    {% for replacement in replacements %}
+        <a href="{% url 'garbages:rm-detail' replacement.pk %}">{{replacement.name}}</a><br>
+    {% endfor %}
+
+    {% if page_obj.has_previous %}
+         <a href="?page={{page_obj.previous_page_number}}">
+            pre
+        </a>
+    {% endif %}
+
+    <span >{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">
+           next
+        </a>
+    {% endif %}
+
+{% endblock content %}
+    

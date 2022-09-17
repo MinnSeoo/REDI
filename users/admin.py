@@ -14,4 +14,11 @@ class CustomUserAdmin(UserAdmin):
 
     list_filter = UserAdmin.list_filter + ("login_method",)
 
-    list_display = ("username", "email", "is_superuser", "login_method")
+    list_display = (
+        "username",
+        "email",
+        "is_superuser",
+        "login_method",
+        "email_verified",
+        "email_secret",
+    )
