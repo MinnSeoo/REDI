@@ -1,14 +1,10 @@
-<header class="text-gray-600 body-font border-b">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+<header class="text-gray-600 body-font">
+  <div class="mx-auto flex-wrap p-5 flex-col md:flex-row items-center inset-0 fixed w-full h-20 border-b flex justify-between">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-      </svg>
+      <img src='https://ifh.cc/g/mP5rPz.png' class = "h-8 w-auto sm:h-10" border='0' ></a>
       <span class="ml-3 text-2xl font-semibold">REDI</span>
-      <span class="inline-block align-text-bottom ml-3 text-sm font-semibold">Reduce Disposable Items</span>
+      <span class="inline-block align-text-bottom ml-3 text-sm font-semibold mt-2">Reduce Disposable Items</span>
     </a>
-    {% if user.is_authenticated %}
-
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-gray-900" href="{% url 'users:logout' %}" >logout</a>
     </nav>
@@ -17,6 +13,5 @@
         <path d="M5 12h14M12 5l7 7-7 7"></path>
       </svg>
     </button>
-    {% endif %}
   </div>
-</header>
+</header> 
