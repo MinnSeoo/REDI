@@ -1,4 +1,4 @@
-<header class="text-gray-600 body-font border-b fixed w-full">
+<header class="text-gray-600 body-font border-b fixed top-0 w-full">    <!--top을 0으로 -> header고정 -->
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
@@ -11,8 +11,8 @@
 
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center"> 
          <!--userprofile-->
-        <div class="fixed wrapper w-24 h-8 z-20 " id = "profile"></div>
-        <button class="profile bg-gray-200 w-40 h-12 fixed rounded-full flex items-center focus:ring-2 focus:ring-blue-200 right-48">
+        <div class="fixed wrapper w-24 h-8 z-20 " ></div>
+        <button class="profile bg-gray-200 w-28 h-8 fixed flex items-center right-56 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
             <span class="rounded-full w-8 h-8 ml-2 mr-2 bg-white container bg-center bg-cover" {% if request.user.avatar %} style="background-image:url('{{request.user.avatar.url}}')" {% endif %}></span>
             <span class="font-bold text-gray-500 block truncate w-16">{{request.user.username}}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
@@ -20,10 +20,12 @@
             </svg> 
         </button>
 
-        <div class="fixed profile-bar hidden mt-4 w-32 h-56 bg-white shadow-md rounded-md"></div>
-        <a class="mr-5 hover:text-gray-900" href="{% url 'users:logout' %}" >logout</a> 
+        <!--logout-->
+        <button class = " bg-gray-200 w-30 h-8 fixed flex items-center right-32 rounded text-base mt-4 md:mt-0">
+            <a class="mr-5 hover:text-gray-900 " href="{% url 'users:logout' %}">logout</a>
+        </button> 
     </nav>
-
+    <!--button-->
     <div class="fixed wrapper w-24 h-8 z-20 right-3 hidden"></div>
     <button class="menu-btn inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
@@ -52,20 +54,19 @@
       
 
         $(".profile").blur(function(){
-            $(".profile-bar").css("display", "block");
-            $(".wrapper").css("display", "block");
+            $(".profile-bar").css("display", "none");
+            $(".wrapper").css("display", "none");
         });
-       
+      
+
     });
-
-
 </script>
 
- <!--sidebar 위치지정-->
-<div class = "fixed right-2 top-16 menu-bar  hidden">
+ <!--sidebar-->
+<div class = "fixed right-2 top-16 menu-bar hidden">
     <div class=" bg-white flex flex-row-reverse">  
         <ul class ="w-32 text-sm font-medium text-gray-900 bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600  rounded-lg dark:text-white">
-            <li class = "text-right">  
+            <li class = "text-center">  
                 <a href="{% url 'garbages:gb-list' %}" class="flex items-center p-2 text-base font-normal text-black rounded-md hover:bg-blue-300">
                     쓰레기 정보
                 </a>
@@ -98,5 +99,15 @@
     </div>
 </div>
 
-
-
+<div class = "fixed right-52 top-16 profile-bar">
+    <div class=" bg-white flex flex-row-reverse">
+        <ul class ="w-32 text-sm font-medium text-gray-900 bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600  rounded-lg dark:text-white">
+            <li class = "text-center"> 
+                <a href="" class = "flex items-center p-2 text-base font-normal text-black rounded-md hover:bg-blue-300">정보수정</a>
+            </li> 
+            <li class = "text-center">
+                <a href="" class = "flex items-center p-2 text-base font-normal text-black rounded-md hover:bg-blue-300">내 프로필</a>
+            </li>
+        </ul>
+    </div>
+</div>
