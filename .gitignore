@@ -2,3 +2,6 @@ node_modules/
 static/
 .prettierignore
 .env
+db.sqlite3
+package-lock.json
+Pipfile.lock
