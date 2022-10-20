@@ -8,7 +8,6 @@ django = "*"
 pillow = "*"
 django-dotenv = "*"
 requests = "*"
-pillow = "*"
 
 [dev-packages]
 flake8 = "*"
@@ -16,7 +15,7 @@ black = "*"
 pillow = "*"
 
 [requires]
-python_version = "3.10"
+python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true
