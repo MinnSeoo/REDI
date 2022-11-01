@@ -3,27 +3,24 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <main class = "flex flex-row min-h-75vh ">
-        <section class = "w-9/12 bg-gray-500 m-10 p-10 box-border text-2xl">
-            <div class = "items">
-                <div class = "">
+    <main class = "h-main">
+        <section class = "h-section">
+                <article class = "h-items">
                     <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
-                </div>
-                <div>
+                
                     <a href="{% url 'garbages:rm-list' %}">대체품 정보</a>
-                </div>
-                <div>
+            
                     <a href="{% url 'histories:home' %}">사용정보 기록</a>
-                </div>
-                <div>
+                
                     <a href="{% url 'posts:home' %}">커뮤니티</a>
-                </div>
+
                 {% if request.user.is_superuser %}
-                        <a href="{% url 'quizs:home' %}">퀴즈 설정</a>
+                    <a href="{% url 'quizs:home' %}">퀴즈 설정</a>
                 {% else %}
                         <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>        
                 {% endif %}
-            </div>
-{% endblock content %}
+                </article> 
         </section>
-    </main>
+        <aside class = "h-aside">광고</aside>
+    </main>  
+{% endblock content %}
