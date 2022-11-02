@@ -5,19 +5,29 @@
 {% block content %}
     <main class = "h-main">
         <section class = "h-section">
-                <article class = "h-items">
+                <div class = "h-trash">
+                    <br>
                     <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
-                
+                </div>
+                <div class = "h-refrm">
+                    <br>
                     <a href="{% url 'garbages:rm-list' %}">대체품 정보</a>
-            
+                </div>
+                <div class = "h-user">
+                    <br>
                     <a href="{% url 'histories:home' %}">사용정보 기록</a>
-                
+                </div>
+                <div class  = "h-cmty">
+                    <br>
                     <a href="{% url 'posts:home' %}">커뮤니티</a>
-
+                </div>
                 {% if request.user.is_superuser %}
+                <div class = "h-quizs">
+                    <br>
                     <a href="{% url 'quizs:home' %}">퀴즈 설정</a>
+                </div>
                 {% else %}
-                        <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>        
+                    <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>        
                 {% endif %}
                 </article> 
         </section>
