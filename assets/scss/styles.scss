@@ -56,34 +56,6 @@
 
 }
 
-.h-main {
-    @apply flex;
-    display: flex;
-}
-
-.h-section {
-    @apply bg-red-300;
-    width: 70%;
-    margin: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-
-}
-
-.h-items {
-    @apply bg-green-400;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    flex-direction: column;
-}
-
-.h-aside {
-    @apply bg-pink-200;
-    width:10px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
 
 
 @tailwind utilities;
