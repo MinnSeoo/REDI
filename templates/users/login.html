@@ -4,6 +4,9 @@
 
 
 {% block content %}
+    <div class = "log-main">
+        <div class = "">
+
     {% include 'partials/social_login.html'%}
     <form method="POST">
         {% csrf_token %}
@@ -13,7 +16,11 @@
         {% endfor %}
         <button>login</button>
     </form>
-    <a href="{% url 'users:signup' %}">Sign up</a>
+    <div class = "">
+        <a href="{% url 'users:signup' %}">Sign up</a>
+    </div>
     <a href="{% url 'users:reset-password' %}">forgot passowrd?</a>
+        </div>
+    </div>
 {% endblock content %}
     

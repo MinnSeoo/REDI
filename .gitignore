@@ -1,5 +1,5 @@
 node_modules/
-static/
+static/css/styles.css
 .prettierignore
 .env
 db.sqlite3
