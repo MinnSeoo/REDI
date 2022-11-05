@@ -3,17 +3,35 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <div class="bg-gray-50 flex flex-col">
-        <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
-        <a href="{% url 'garbages:rm-list' %}">대체품 정보</a>
-        <a href="{% url 'histories:home' %}">사용정보 기록</a>
-        <a href="{% url 'posts:home' %}">커뮤니티</a>
-        
-        {% if request.user.is_superuser %}
-            <a href="{% url 'quizs:home' %}">퀴즈 설정</a>
-        {% else %}
-            <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>        
-        {% endif %}
-    </div>
+    <main class = "h-main">
+        <section class = "h-section">
+                <div class = "h-trash">
+                    <br>
+                    <img src="" alt="">
+                    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+                </div>
+                <div class = "h-refrm">
+                    <br>
+                    <a href="{% url 'garbages:rm-list' %}">대체품 정보</a>
+                </div>
+                <div class = "h-user">
+                    <br>
+                    <a href="{% url 'histories:home' %}">사용정보 기록</a>
+                </div>
+                <div class  = "h-cmty">
+                    <br>
+                    <a href="{% url 'posts:home' %}">커뮤니티</a>
+                </div>
+                {% if request.user.is_superuser %}
+                <div class = "h-quizs">
+                    <br>
+                    <a href="{% url 'quizs:home' %}">퀴즈 설정</a>
+                </div>
+                {% else %}
+                    <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>        
+                {% endif %}
+                </article> 
+        </section>
+        <aside class = "h-aside">광고</aside>
+    </main>  
 {% endblock content %}
-    

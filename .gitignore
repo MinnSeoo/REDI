@@ -1,4 +1,8 @@
 node_modules/
-static/
+static/css/styles.css
 .prettierignore
 .env
+db.sqlite3
+package-lock.json
+Pipfile.lock
+

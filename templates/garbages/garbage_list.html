@@ -3,7 +3,7 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>일회용품 정보</h1>
+    <div class = "">일회용품 정보</div>
     
     {% if user.is_superuser %}
         <a href ="{% url 'garbages:gb-add' %}">일회용품 추가</a>

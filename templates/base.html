@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/styles.css">
+        <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/login.css">
+        <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/Home.css">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <title>{% block title %}{% endblock title %}</title>
     </head>
@@ -13,7 +15,7 @@
 
     {% include 'partials/header.html' %}
 
-    <div class="mt-24 min-h-75vh">
+    <div class="min-h-75vh mt-20">
     {% block content %}{% endblock content %}
     </div>
     
