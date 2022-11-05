@@ -4,23 +4,33 @@
 
 
 {% block content %}
-    <div class = "log-main">
-        <div class = "">
-
-    {% include 'partials/social_login.html'%}
-    <form method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            {{field.label}}
-            {{field}}
-        {% endfor %}
-        <button>login</button>
-    </form>
-    <div class = "">
-        <a href="{% url 'users:signup' %}">Sign up</a>
+<div class = "">
+    <div class = "explain">
+        <h1 class = "h1">REDI란 ?</h1><br>
+        <h3 class = "h3">Reduce Disposabl Item(일회용품을 줄이다)의 줄임말로 <br>
+            최근 늘어나고 있는 일회용품 사용을 줄이기 위하여<br>
+            매일 사용을 기록, 확인하며 일회용품 사용을 줄일 수 있도록<br>
+            제작된 웹 사이트입니다.
+        </h3>
     </div>
-    <a href="{% url 'users:reset-password' %}">forgot passowrd?</a>
+    <div class = "m-evry">
+        <aside class = "log-main">
+            <div class = "">
+        {% include 'partials/social_login.html'%}
+        <form method=   "POST">
+            {% csrf_token %}
+            {% for field in form %}
+                {{field.label}}
+                {{field}}
+            {% endfor %}
+            <button>login</button>
+        </form>
+        <div class = "Sign">
+            <a href="{% url 'users:signup' %}">Sign up</a>
         </div>
+        <a href="{% url 'users:reset-password' %}">forgot passowrd?</a>
+            </div>
+        </aside>
     </div>
+</div>
 {% endblock content %}
-    

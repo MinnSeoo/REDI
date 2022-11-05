@@ -1,7 +1,33 @@
+
+
+.explain {
+    outline-color: blue;
+    outline-style: solid;
+    outline-width: 3px;
+    padding: 80px;
+    line-height: 23px; 
+    width: 60%;
+}
+
+.h1 {
+    padding-left: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.h3 {
+    font-size: 20px;
+}
+
+.m-evry {
+    padding-left: 15cm;
+}
+
 .log-main {
-    margin: 45px;
-    width: 490px;
-    height: 500px;
-    border: 3px solid black;
-    padding: 20px;
+    margin: 83px;
+    outline-color: black;
+    outline-style: solid;
+    outline-width: 3px;
+    width: 40%;
+
 }
