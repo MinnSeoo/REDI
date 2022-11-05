@@ -1,7 +1,5 @@
 .log-main {
-    margin: 45px;
-    width: 490px;
-    height: 500px;
-    border: 3px solid black;
-    padding: 20px;
+    width: 30%;
+    outline-style: solid;
+    outline-color: purple;
 }
