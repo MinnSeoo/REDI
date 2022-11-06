@@ -3,30 +3,41 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>일회용품 정보</h1>
-    
-    {% if user.is_superuser %}
-        <a href ="{% url 'quizs:add' %}">퀴즈 추가</a>
-    {% endif %}
-        
-
-    {% for quiz in quizs %}
+<div class="border-black border-solid border-4 rounded-2xl text-center mx-96 p-10 mt-24">
+    <div>
+        <h1 class="text-4xl font-bold">퀴즈 정보</h1>
+    </div>
+    <div>
+        <div class="h-40 pt-20 text-xl">
+        {% for quiz in quizs %}
         <a href="{% url 'quizs:detail' quiz.pk %}">{{quiz.question}}</a><br>
-    {% endfor %}
-
-    {% if page_obj.has_previous %}
-         <a href="?page={{page_obj.previous_page_number}}">
-            pre
-        </a>
-    {% endif %}
-
-    <span >{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
-
-    {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">
-           next
-        </a>
-    {% endif %}
-
-{% endblock content %}
+        {% endfor %}
+        </div>
+        <div class="pt-40">
+            <div class="pb-5">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">
+                <img src="https://ifh.cc/g/GOSmrT.png" class="w-4 inline-block">
+            </a>
+            {% else %}
+            <img src="https://ifh.cc/g/nsjHNs.png" class="w-4 inline-block">
+            {% endif %}
+            
+            <span >{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+            
+            {% if page_obj.has_next  %}
+            <a href="?page={{page_obj.next_page_number}}">
+                <img src="https://ifh.cc/g/8Vo8dT.png" class="w-4 inline-block">
+            </a>
+            {% else %}
+            <img src="https://ifh.cc/g/AAkTDl.png" class="w-4 inline-block">
+            {% endif %}
+            </div>
+            {% if user.is_superuser %}
+            <br><a href ="{% url 'quizs:add' %}" class="border-2 border-solid border-black rounded-xl px-10 bg-blue-600 text-white hover:bg-white hover:text-blue-600">퀴즈 추가</a><br>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %} pt-10
     
