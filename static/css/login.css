@@ -1,33 +1,61 @@
-
-
 .explain {
-    outline-color: blue;
-    outline-style: solid;
-    outline-width: 3px;
-    padding: 80px;
+    padding-left: 20px;
+    padding-right: 25px;
     line-height: 23px; 
-    width: 60%;
+    width: 43%;
+    position: relative;
+    bottom: 2px;
+    left: 15ch;
+    top: 20ch
 }
 
 .h1 {
     padding-left: 10px;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
 }
 
 .h3 {
-    font-size: 20px;
+    padding-left: 10px;
+    font-size: 25px;
 }
 
-.m-evry {
-    padding-left: 15cm;
+.title {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
 }
 
 .log-main {
     margin: 83px;
-    outline-color: black;
+    outline-color: gray;
     outline-style: solid;
-    outline-width: 3px;
-    width: 40%;
+    border-radius: 10px;
+    width: 33%;
+    position: relative;
+    bottom: 20ch;
+    left:85ch;
+    font-size: 20px;
+}
 
+.bt-login {
+    text-align: center;
+    font-size: 23px;
+    position: relative;
+    top: 2.5ch;
+    outline-style: solid;
+    outline-color: black;
+    border-radius: 30px;
+}
+
+.Sign-up {
+    position: relative;
+    left: 2cm;
+    top: 2cm;
+    
+}
+
+.f-pw {
+    position: relative;
+    left: 4ch;
 }
