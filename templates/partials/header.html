@@ -1,9 +1,9 @@
 <header class="text-gray-600 body-font">
-  <div class="mx-auto flex-wrap p-5 flex-col md:flex-row items-center inset-0 fixed w-full h-20 border-b flex justify-between">
-    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+  <div class="mx-auto flex-wrap p-5 flex-col md:flex-row items-center inset-0 fixed w-full h-20 border-b">
+    <a class="flenx title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <img src='https://ifh.cc/g/mP5rPz.png' class = "h-8 w-auto sm:h-10" border='0' ></a>
       <span class="ml-3 text-2xl font-semibold">REDI</span>
-      <span class="inline-block align-text-bottom ml-3 text-sm font-semibold mt-2">Reduce Disposable Items</span>
+      <span class="inline-block align-text-bottom ml-3 text-sm fot-semibold mt-2">Reduce Disposable Items</span>
     </a>
     {% if user.is_authenticated %}
 
@@ -25,6 +25,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
         </svg> 
     </button>
+    {% endif %}
   </div>
 </header>
 
@@ -50,8 +51,6 @@
           $(".profile-bar").css("display", "none");
           $(".wrapper").css("display", "none");
       });
-    
-
   });
 </script>
 
@@ -91,8 +90,8 @@
       <ul>
   </div>
 </div>
-
-<div class = "fixed right-36 top-16 profile-bar">
+<!--profile bar-->
+<div class = "fixed right-36 top-16 profile-bar hidden"> <!--hidden 부분 문제 (아마 button의 자식 요소로 취급이 안 되어있어서 그런것 같음)-->
   <div class=" bg-white flex flex-row-reverse">
       <ul class ="w-32 text-sm font-medium text-gray-900 bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600  rounded-lg dark:text-white">
           <li class = "text-center"> 
