@@ -5,7 +5,7 @@
 {% block content %}
     <h1>일회용품 정보</h1>
     
-    <div class="mt-5 ml-5 rounded-full w-60 bg-green-50 p-5 pl-16">
+    <div class="mt-11 ml-11 rounded-full w-60 bg-green-50 p-5 text-center">
         {% if user.is_superuser %}
             <a href ="{% url 'garbages:gb-add' %}">일회용품 추가</a>
         {% endif %}
@@ -13,7 +13,7 @@
         
     
     {% for garbage in garbages %}
-        <div class = "border-2 p-3 text-center w-80 h-72 rounded-3xl inline-flex ml-36 mt-16 text-xl ">
+        <div class = "border-2 p-3 text-center w-80 h-72 rounded-3xl inline-flex ml-36 mt-11 text-xl ">
         <a href="{% url 'garbages:gb-detail' garbage.pk %}">{{garbage.name}}</a><br>
         </div>
     {% endfor %}
