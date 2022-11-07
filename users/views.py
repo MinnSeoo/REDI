@@ -20,6 +20,9 @@ class UserHomeView(mixins.LoggedInOnlyView, TemplateView):
 
     template_name = "users/home.html"
 
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
 
 class LoginView(mixins.LoggedOutOnlyView, FormView):
 
