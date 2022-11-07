@@ -1,12 +1,12 @@
-<header class="text-gray-600 body-font">
-  <div class="mx-auto flex-wrap p-5 flex-col md:flex-row items-center inset-0 fixed w-full h-20 border-b">
-    <a class="flenx title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <img src='https://ifh.cc/g/mP5rPz.png' class = "h-8 w-auto sm:h-10" border='0' ></a>
+<header class=" flex-wrap p-5 flex-col md:flex-row items-center inset-0 fixed bg-white w-full h-20 border-b flex justify-between text-gray-600 body-font">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <a href="{% url 'core:home' %}">
+      <img src='https://ifh.cc/g/mP5rPz.png' class = "h-8 w-auto sm:h-10" border='0'>
+      </a>
       <span class="ml-3 text-2xl font-semibold">REDI</span>
-      <span class="inline-block align-text-bottom ml-3 text-sm fot-semibold mt-2">Reduce Disposable Items</span>
+      <span class="inline-block align-text-bottom ml-3 text-sm font-semibold mt-2">Reduce Disposable Items</span>
     </a>
     {% if user.is_authenticated %}
-
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                <!--userprofile-->
                <div class="fixed wrapper w-24 h-8 z-20 hidden" ></div>
