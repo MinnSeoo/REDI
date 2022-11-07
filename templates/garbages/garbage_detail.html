@@ -4,10 +4,20 @@
 
 {% block content %}
     <h1>쓰레기 디테일</h1>
-    <a href="{% url 'garbages:gb-update' garbage.pk %}">수정하기</a>
-    <a href="{% url 'garbages:gb-delete' garbage.pk %}">지우기</a>
-    {{garbage.name}}
+    <div class = "">
+        <a href="{% url 'garbages:gb-update' garbage.pk %}">수정하기</a>
+    </div>
 
-    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+    <div>
+        <a href="{% url 'garbages:gb-delete' garbage.pk %}">지우기</a>
+    </div>
+
+    <div class = "">
+        {{garbage.name}}
+    </div>
+
+    <div class = "mt-96 ml-3 rounded-full bg-purple-50 w-44 p-3 text-center">
+        <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+    </div>
 {% endblock content %}
     
