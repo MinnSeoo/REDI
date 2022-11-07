@@ -12,6 +12,8 @@ django-dotenv = "*"
 flake8 = "*"
 black = "*"
 pillow = "*"
+awsebcli = "*"
+eb = "*"
 
 [requires]
 python_version = "3.8"
