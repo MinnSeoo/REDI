@@ -5,18 +5,23 @@
 {% block content %}
     <h1>대체품 정보</h1>
     
-    {% if user.is_superuser %}
-        <a href ="{% url 'garbages:rm-add' %}">대체품 추가</a>
-    {% endif %}
+    <div class="mt-11 ml-11 rounded-full w-60 bg-green-50 p-5 text-center">
+        {% if user.is_superuser %}
+            <a href ="{% url 'garbages:rm-add' %}">대체품 추가</a>
+        {% endif %}
+    </div>
         
 
     {% for replacement in replacements %}
-        <a href="{% url 'garbages:rm-detail' replacement.pk %}">{{replacement.name}}</a><br>
+        <div class = "border-2 p-3 text-center w-80 h-72 rounded-3xl inline-flex ml-36 mt-11 text-xl ">
+            <a href="{% url 'garbages:rm-detail' replacement.pk %}">{{replacement.name}}</a><br>
+        </div>
     {% endfor %}
 
+    <div class = "mt-16 text-center">
     {% if page_obj.has_previous %}
          <a href="?page={{page_obj.previous_page_number}}">
-            pre
+            <img src="https://ifh.cc/g/2DMHxx.png" class = "w-7 inline-block">
         </a>
     {% endif %}
 
@@ -24,9 +29,10 @@
 
     {% if page_obj.has_next  %}
         <a href="?page={{page_obj.next_page_number}}">
-           next
+            <img src = "https://ifh.cc/g/G030fq.png" class = "w-7 inline-block">
         </a>
     {% endif %}
+    </div> 
 
 {% endblock content %}
     

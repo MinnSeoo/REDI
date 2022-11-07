@@ -12,7 +12,10 @@
         {% endfor %}
         <button>add</button>
     </form>
-    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+
+    <div class = "mt-60 ml-3 rounded-full bg-purple-50 w-44 p-3 text-center">
+        <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+    </div>
 
 {% endblock content %}
     
