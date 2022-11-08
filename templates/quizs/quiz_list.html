@@ -10,7 +10,7 @@
     <div>
         <div class="h-40 pt-20 text-xl">
         {% for quiz in quizs %}
-        <a href="{% url 'quizs:detail' quiz.pk %}">{{quiz.question}}</a><br>
+        <a href="{% url 'quizs:detail' quiz.pk %}" class="no-underline hover:underline">{{quiz.question}}</a><br>
         {% endfor %}
         </div>
         <div class="pt-40">
