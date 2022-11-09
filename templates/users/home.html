@@ -5,44 +5,42 @@
 {% block content %}
     <main class = "h-main">
         <section class = "h-section">
-                <div class = "h-trash border border-solid">
-                    <img src="https://ifh.cc/g/3JnDas.png" class = "h-20 inline-block relative right-20">
-                    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
-                        <img src="https://ifh.cc/g/3JnDas.png" class = "h-20 inline-block relative left-20">
+                <div class = "h-trash">
+                    <img src="https://ifh.cc/g/3JnDas.png" class = "h-imgR">
+                    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보 </a>
+                        <img src="https://ifh.cc/g/3JnDas.png" class = "h-imgL">
                     
                 </div>
                 <div class = "h-refrm">
-                    <div class = "h-trash border border-solid">
-                        <br>
-                        <img src="https://ifh.cc/g/JnyWGk.png" class = "h-20 inline-block relative right-20">
-                            <a href="{% url 'garbages:rm-list' %}">대체품 정보</a>
-                        <img src="https://ifh.cc/g/JnyWGk.png" class = "h-20 inline-block relative left-20">
-                    </div>
+                    <br>
+                    <img src="https://ifh.cc/g/JnyWGk.png" class = "h-imgR">
+                        <a href="{% url 'garbages:rm-list' %}">대체품 정보</a>
+                    <img src="https://ifh.cc/g/JnyWGk.png" class = "h-imgL">
                 </div>
                 <div class = "h-user">
                     <br>
-                    <img src="https://cdn-icons-png.flaticon.com/512/5673/5673087.png" class = "h-20 inline-block relative right-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5673/5673087.png" class = "h-imgR">
                         <a href="{% url 'histories:home' %}">사용정보 기록</a>
-                    <img src="https://cdn-icons-png.flaticon.com/512/5673/5673087.png " class = "h-20 inline-block relative left-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5673/5673087.png " class = "h-imgL">
                 </div>
                 <div class  = "h-cmty">
                     <br>
-                    <img src="https://cdn-icons-png.flaticon.com/512/4660/4660933.png " class = "h-20 inline-block relative right-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4660/4660933.png " class = "h-imgR">
                         <a href="{% url 'posts:home' %}">커뮤니티</a>
-                    <img src="https://cdn-icons-png.flaticon.com/512/4660/4660933.png " class = "h-20 inline-block relative left-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4660/4660933.png " class = "h-imgL">
                 </div>
                 {% if request.user.is_superuser %}
                 <div class = "h-quizs">
                     <br>
-                    <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-20 inline-block relative right-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-imgR">
                         <a href="{% url 'quizs:home' %}">퀴즈 설정</a>
-                    <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-20 inline-block relative left-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-imgL">
                 </div>
                 {% else %}
                     <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>        
                 {% endif %}
                 </article> 
         </section>
-        <aside class = "h-aside">퀴즈 순위</aside>
+        <div class = "q-rank">퀴즈 순위</div>
     </main>  
 {% endblock content %}
