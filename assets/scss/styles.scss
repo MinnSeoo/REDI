@@ -60,12 +60,5 @@
     @apply flex items-center p-2 text-base font-normal text-black rounded-md hover:bg-blue-300;
 }
 
-.h-imgR {
-    @apply h-10 inline-block relative right-20;
-}
-
-.h-imgL {
-    @apply h-10 inline-block relative left-20;
-}
 
 @tailwind utilities;
