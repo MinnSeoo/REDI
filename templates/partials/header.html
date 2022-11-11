@@ -91,11 +91,12 @@
         const menuBar = document.getElementById("menu-bar");
         const profile = document.getElementById("profile");
         const profileBar = document.getElementById("profile-bar");
-
-        menuBtn.addEventListener("focus", () => setTimeout(toggleDisplay, 300,menuBar, wrapper1));
-        menuBtn.addEventListener("blur", () => setTimeout(toggleDisplay, 300,menuBar, wrapper1));
-        profile.addEventListener("focus", () => setTimeout(toggleDisplay, 300,profileBar, wrapper2));
-        profile.addEventListener("blur", () => setTimeout(toggleDisplay, 300,profileBar, wrapper2));
+        if (menuBtn){
+            menuBtn.addEventListener("focus", () => setTimeout(toggleDisplay, 300,menuBar, wrapper1));
+            menuBtn.addEventListener("blur", () => setTimeout(toggleDisplay, 300,menuBar, wrapper1));
+            profile.addEventListener("focus", () => setTimeout(toggleDisplay, 300,profileBar, wrapper2));
+            profile.addEventListener("blur", () => setTimeout(toggleDisplay, 300,profileBar, wrapper2));
+        }
 
         function toggleDisplay(object, wrapper) {
             object.classList.toggle("hidden");
