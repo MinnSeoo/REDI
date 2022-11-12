@@ -56,6 +56,9 @@
 
 }
 
+.menu-options {
+    @apply flex items-center p-2 text-base font-normal text-black rounded-md hover:bg-blue-300;
+}
 
 
 @tailwind utilities;
