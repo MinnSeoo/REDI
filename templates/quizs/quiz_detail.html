@@ -25,11 +25,20 @@
                 </div>
                 {% endfor %}
             </span>
-            
-            <a href="{% url 'quizs:edit' quiz.pk %}">퀴즈 수정</a>
-            <a href="{% url 'quizs:delete' quiz.pk %}">퀴즈 삭제</a>
-            
-            <a href="{% url 'quizs:add-answer' quiz.pk %}">답 추가</a>
+            <div class="pt-10">
+                <button class="text-black font-bold px-1 -mx-1 rounded-l border border-solid border-black hover:border-gray-300 hover:text-gray-500">
+                    <a href="{% url 'quizs:edit' quiz.pk %}">퀴즈 수정
+                    <img src="https://ifh.cc/g/67kpqD.png" class="w-5 inline-block pb-1"></a>
+                </button>
+                <button class="text-black font-bold -mx-1 px-1 border border-solid border-black hover:border-gray-300 hover:text-gray-500">
+                    <a href="{% url 'quizs:delete' quiz.pk %}">퀴즈 삭제
+                    <img src="https://ifh.cc/g/LkOjf3.png" class="w-5 inline-block pb-1"></a>
+                </button>
+                <button class="text-black font-bold px-1 -mx-1 rounded-r border border-solid border-black hover:border-gray-300 hover:text-gray-500">
+                    <a href="{% url 'quizs:add-answer' quiz.pk %}">답 추가
+                    <img src="https://ifh.cc/g/WpwhPo.png" class="w-5 inline-block pb-1"></a>
+                </button>
+            </div>
         </div>
     </div>
 
