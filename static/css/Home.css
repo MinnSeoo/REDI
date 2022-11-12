@@ -1,11 +1,10 @@
 .h-main {
     display: flex;
+    position: relative;
+    top: 10px;
 }
 
-.h-section {
-    outline-style: solid;
-    outline-width: 4px;
-    outline-color: plum;
+.h-section {    
     margin: 35px;
     line-height: 23px; 
     width: 70%;
@@ -52,7 +51,7 @@
     margin-bottom: 30px;
 }
 
-.h-aside {
+.q-rank {
     outline-style: solid;
     outline-width: 4px;
     outline-color: purple;

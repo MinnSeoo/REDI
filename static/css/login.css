@@ -1,7 +1,33 @@
-.log-main {
-    margin: 45px;
-    width: 490px;
-    height: 500px;
-    border: 3px solid black;
-    padding: 20px;
+.explain {
+    display: block;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 4px;
+    border-color: pink;
 }
+
+.h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: green;
+}
+
+.h3 {
+    font-size: 19.2px;
+    font-weight: 600;
+}
+
+.log-main {
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 4px;
+    border-color: purple;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+
