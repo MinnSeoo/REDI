@@ -4,6 +4,16 @@
 
 
 {% block content %}
+<div class = "s-explain">
+    <h1 class = "s-h1"> REDI란 ?</h1><br>
+        <h3 class = "s-h3">&nbsp;  Reduce Disposable Item(일회용품을 줄이다)의 줄임말로 <br><br>
+            &nbsp; 최근 늘어나고 있는 일회용품 사용을 줄이기 위하여<br><br>
+            &nbsp; 매일 사용을 기록, 확인하며 일회용품 사용을 줄일 수 있도록<br><br>
+            &nbsp; 제작된 웹 사이트입니다.
+        </h3>
+</div>
+<div class = "s-login">
+    <h1 class = "s-title">회원가입</h1>
     {% include 'partials/social_login.html'%}
     <form method="POST">
         {% csrf_token %}
@@ -13,6 +23,7 @@
         {% endfor %}
         <button>signup</button>
     </form>
-    <a href="{% url 'users:login' %}">login</a>
+    <a href="{% url 'users:login' %}" >login</a>
+</div>
 {% endblock content %}
     

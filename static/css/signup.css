@@ -1,0 +1,37 @@
+.s-explain {
+    position: fixed;
+    margin-left: 4.5cm;
+    margin-top: 3.2cm;
+}
+
+
+.s-h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: green;
+}
+
+.s-h3 {
+    font-size: 19.2px;
+    font-weight: 600;
+}
+
+.s-login {
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 4px;
+    border-color: gray;
+    position: fixed;
+    right: 4cm;
+    bottom: 2.5cm;
+    margin: 10px;   
+    padding: 4px;
+    height: 480px;
+    width: 430px;
+}
+
+.s-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
