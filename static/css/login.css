@@ -1,9 +1,8 @@
+
 .explain {
-    display: block;
-    border-style: solid;
-    border-width: 4px;
-    border-radius: 4px;
-    border-color: pink;
+    position: fixed;
+    margin-left: 4cm;
+    margin-top: 3cm;
 }
 
 .h1 {
@@ -19,9 +18,16 @@
 
 .log-main {
     border-style: solid;
-    border-width: 4px;
+    border-width: 3px;
     border-radius: 4px;
-    border-color: purple;
+    border-color: gray;
+    position: fixed;
+    right: 4cm;
+    bottom: 3cm;
+    margin: 10px;   
+    padding: 4px;
+    height: 430px;
+    width: 450px;
 }
 
 .title {
@@ -30,4 +36,26 @@
     font-size: x-large;
 }
 
+.bt-login {
+    margin-left: 4cm;
+    margin-right: 4cm;
+    text-align: center;
+    font-size: 20px;
+    outline-style: solid;
+    outline-color: black;
+    border-radius: 20px
+}
+
+.bt-login:hover {
+    color: red;
+}
+
+.Sign-up {
+    text-align: center;
+}
+
+.bt-sign:hover {
+    color: green;
+    
+}
 
