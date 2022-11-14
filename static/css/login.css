@@ -1,4 +1,3 @@
-
 .explain {
     position: fixed;
     margin-left: 4.5cm;
@@ -28,7 +27,6 @@
     padding: 4px;
     height: 480px;
     width: 430px;
-
 }
 
 .title {
@@ -37,29 +35,58 @@
     font-size: x-large;
 }
 
-.bt-login {
-    .form {
+.form {
     display: flex;
-
 }
 
-.bt-login {
-    background-color: #81c148;
-    margin-left: 4cm;
-    margin-right: 4cm;
+.lg-form {
+    position: relative;
+    bottom: 1.8cm;
+    margin-left: 15px;
+    margin-bottom: 18px;
+    font-size: 18.5px;
+}
+
+.bt-login {  
+    margin-left: 3.7cm;
+    margin-right: 3.7cm;
     text-align: center;
-    color: white;
+    color: black;
     font-size: 22px;
     outline-style: solid;
-    outline-color: #00a000;
+    outline-color: gray;
     border-radius: 20px
+    
 }
 
 .bt-login:hover {
-  color: #00a000;
+    color: #00a000;
 }
 
-.Sign-up {
-    text-align: center;
+.creat-account {
+    margin-left: 2.4cm;
+    position: relative;
+    top: 4cm;
 }
 
+.find-pw {
+    color: #ff3b1a;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 2.7cm;
+    position: relative;
+    bottom: 3cm;
+}
+
+.find-pw:hover {
+    text-decoration: underline;
+}
+
+.creat-ptag {
+    font-size: 14px;
+}
+
+.creat-atag {
+    color: #ff3b1a;
+    font-weight: bold;
+}
