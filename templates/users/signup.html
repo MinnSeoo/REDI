@@ -18,8 +18,17 @@
     <form method="POST">
         {% csrf_token %}
         {% for field in form %}
-            {{field.label}}
-            {{field}}
+            {% comment %} {{field.label}}
+            {{field}} {% endcomment %}
+        <div class = "si-form">
+            <div class="si-form1">
+                <labl for="{{ field.id_for_label }}" class = "ml-2">{{ field.label }} <br></labl>
+            </div> 
+            <div class = "si-form2">
+                <input type="{{ field.field.widget.input_type }}" class="ml-2"
+                    id="{{ field.id_for_label }}" placeholder="{{ field.label }}" name="{{ field.name }}">
+            </div>  
+        </div>      
         {% endfor %}
         <button>signup</button>
     </form>
