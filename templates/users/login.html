@@ -7,7 +7,7 @@
 <body class = "login"> 
     <div class = "explain">
         <h1 class = "h1"> REDI란 ?</h1><br>
-        <h3 class = "h3">&nbsp;  Reduce Disposable Item(일회용품을 줄이다)의 줄임말로 <br><br>
+        <h3 class = "h3">&nbsp; Reduce Disposable Item(일회용품을 줄이다)의 줄임말로 <br><br>
             &nbsp; 최근 늘어나고 있는 일회용품 사용을 줄이기 위하여<br><br>
             &nbsp; 매일 사용을 기록, 확인하며 일회용품 사용을 줄일 수 있도록<br><br>
             &nbsp; 제작된 웹 사이트입니다.
@@ -19,18 +19,25 @@
     <form method=   "POST">
         {% csrf_token %}
         {% for field in form %}
-            {{field.label}}
-            {{field}}
+    <div class = "lg-form ">
+        {{field.label}} : &nbsp;
+        {{field}} <br>
+    </div>
+       
         {% endfor %}
         <div class = "bt-login">
             <button>로그인</button>
         </div>
     </form>
-        <div class = "Sign-up">
-            <a href="{% url 'users:signup' %}" class = "bt-sign">회원가입</a> <!--회원가입-->
-        </div>
-        <div class = "f-pw">
-            <a href="{% url 'users:reset-password' %}">비밀번호 찾기</a>
+    <div class = "creat-account">
+       <p class = "creat-ptag">
+            아직 계정이 없으십니까? &nbsp;
+            <a href="{% url 'users:signup' %}" class = "creat-atag ">회원가입</a> <!--회원가입-->
+        </p>
+    </div>
+
+        <div class = "find-pw">
+            <a href="{% url 'users:reset-password' %}">비밀번호가 기억나지 않습니까?</a>
         </div>
     </aside>
 </body>
