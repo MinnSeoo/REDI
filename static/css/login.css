@@ -28,6 +28,7 @@
     padding: 4px;
     height: 480px;
     width: 430px;
+
 }
 
 .title {
@@ -61,7 +62,7 @@
 }
 
 .bt-login:hover {
-    color: #00a000;
+  color: #00a000;
 }
 
 .creat-account {
@@ -91,6 +92,5 @@
     color: #ff3b1a;
     font-weight: bold;
 }
-
 
 
