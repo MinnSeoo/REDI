@@ -28,6 +28,7 @@
     padding: 4px;
     height: 480px;
     width: 430px;
+
 }
 
 .title {
@@ -36,7 +37,8 @@
     font-size: x-large;
 }
 
-.form {
+.bt-login {
+    .form {
     display: flex;
 
 }
@@ -54,11 +56,10 @@
 }
 
 .bt-login:hover {
-    color: #00a000;
+  color: #00a000;
 }
 
 .Sign-up {
     text-align: center;
 }
-
 
