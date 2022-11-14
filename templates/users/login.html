@@ -19,18 +19,25 @@
     <form method=   "POST">
         {% csrf_token %}
         {% for field in form %}
-            {{field.label}}
-            {{field}}
+    <div class = "lg-form ">
+        {{field.label}} : &nbsp;
+        {{field}} <br>
+    </div>
+       
         {% endfor %}
         <div class = "bt-login">
             <button>로그인</button>
         </div>
     </form>
-        <div class = "Sign-up">
-            <a href="{% url 'users:signup' %}" class = "bt-sign">회원가입</a> <!--회원가입-->
-        </div>
-        <div class = "f-pw">
-            <a href="{% url 'users:reset-password' %}">비밀번호 찾기</a>
+    <div class = "creat-account">
+       <p class = "creat-ptag">
+            아직 계정이 없으십니까? &nbsp;
+            <a href="{% url 'users:signup' %}" class = "creat-atag ">회원가입</a> <!--회원가입-->
+        </p>
+    </div>
+
+        <div class = "find-pw">
+            <a href="{% url 'users:reset-password' %}">비밀번호가 기억나지 않습니까?</a>
         </div>
     </aside>
 </body>
