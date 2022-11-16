@@ -23,9 +23,9 @@
             {% comment %} {{field.label}}
             {{field}} {% endcomment %}
         <div class = "signup-form">
-                <labl for="{{ field.id_for_label }}" class = "ml-2">{{ field.label }} : </labl>
+                <label for="{{ field.id_for_label }}" class = "ml-2">{{ field.label }} : </label>
                 <input type="{{ field.field.widget.input_type }}" class="ml-2"
-                    id="{{ field.id_for_label }}" placeholder="{{ field.label }}" name="{{ field.name }}"> 
+                    id="{{ field.id_for_label }}" placeholder="{{ field.field.widget.attrs.placeholder }}"> 
         </div>      
         {% endfor %}
         <div class = "bt-signup">
