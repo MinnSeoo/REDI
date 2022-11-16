@@ -5,3 +5,9 @@ static/css/styles.css
 db.sqlite3
 package-lock.json
 Pipfile.lock
+
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
