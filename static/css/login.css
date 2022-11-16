@@ -60,7 +60,7 @@
 }
 
 .bt-login:hover {
-    color: #00a000;
+    outline-color : #bdef90;
 }
 
 .creat-account {
@@ -89,4 +89,8 @@
 .creat-atag {
     color: #ff3b1a;
     font-weight: bold;
+}
+
+.creat-atag:hover {
+    text-decoration: underline;
 }
