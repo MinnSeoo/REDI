@@ -1,21 +1,22 @@
-.explain {
+.s-explain {
     position: fixed;
     margin-left: 4.5cm;
     margin-top: 3.2cm;
 }
 
-.h1 {
+
+.s-h1 {
     font-size: 30px;
     font-weight: 800;
     color: green;
 }
 
-.h3 {
+.s-h3 {
     font-size: 19.2px;
     font-weight: 600;
 }
 
-.log-main {
+.s-login {
     border-style: solid;
     border-width: 3px;
     border-radius: 4px;
@@ -29,64 +30,33 @@
     width: 430px;
 }
 
-.title {
+.s-title {
     text-align: center;
     font-weight: bold;
     font-size: x-large;
 }
 
-.form {
-    display: flex;
-}
-
-.lg-form {
+.signup-form {
     position: relative;
-    bottom: 1.8cm;
-    margin-left: 15px;
-    margin-bottom: 18px;
+    bottom: 2cm;
+    margin-bottom: 20px;
     font-size: 18.5px;
+    margin-left: 10px;
 }
 
-.bt-login {  
+.bt-signup {
+    position: relative;
+    bottom: 2cm;
     margin-left: 3.7cm;
     margin-right: 3.7cm;
     text-align: center;
     color: black;
-    font-size: 22px;
+    font-size: 20px;
     outline-style: solid;
     outline-color: gray;
     border-radius: 20px
-    
 }
 
-.bt-login:hover {
-    color: #00a000;
-}
-
-.creat-account {
-    margin-left: 2.4cm;
-    position: relative;
-    top: 4cm;
-}
-
-.find-pw {
-    color: #ff3b1a;
-    font-size: 14px;
-    font-weight: bold;
-    margin-left: 2.7cm;
-    position: relative;
-    bottom: 3cm;
-}
-
-.find-pw:hover {
-    text-decoration: underline;
-}
-
-.creat-ptag {
-    font-size: 14px;
-}
-
-.creat-atag {
-    color: #ff3b1a;
-    font-weight: bold;
+.bt-signup:hover {
+    outline-color: #bdef90;
 }

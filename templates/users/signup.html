@@ -4,15 +4,38 @@
 
 
 {% block content %}
+<div class = "s-explain">
+    <h1 class = "s-h1"> REDI란 ?</h1><br>
+        <h3 class = "s-h3">&nbsp;  Reduce Disposable Item(일회용품을 줄이다)의 줄임말로 <br><br>
+            &nbsp; 최근 늘어나고 있는 일회용품 사용을 줄이기 위하여<br><br>
+            &nbsp; 매일 사용을 기록, 확인하며 일회용품 사용을 줄일 수 있도록<br><br>
+            &nbsp; 제작된 웹 사이트입니다.
+        </h3>
+</div>
+<div class = "s-login">
+    <h1 class = "s-title">회원가입</h1>
+<div class = "relative top-2">
     {% include 'partials/social_login.html'%}
+</div>
     <form method="POST">
         {% csrf_token %}
         {% for field in form %}
-            {{field.label}}
-            {{field}}
+            {% comment %} {{field.label}}
+            {{field}} {% endcomment %}
+        <div class = "signup-form">
+                <labl for="{{ field.id_for_label }}" class = "ml-2">{{ field.label }} : </labl>
+                <input type="{{ field.field.widget.input_type }}" class="ml-2"
+                    id="{{ field.id_for_label }}" placeholder="{{ field.label }}" name="{{ field.name }}"> 
+        </div>      
         {% endfor %}
-        <button>signup</button>
+        <div class = "bt-signup">
+            <button>가입하기</button>
+        </div>
     </form>
-    <a href="{% url 'users:login' %}">login</a>
+    <p class = "relative left-28 top-12 text-sm">
+        이미 계정이 있습니까? &nbsp;
+        <a href="{% url 'users:login' %}" class = "text-red-500 font-bold hover:underline">Login</a>
+    </p>
+</div>
 {% endblock content %}
     

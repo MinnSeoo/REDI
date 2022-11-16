@@ -3,14 +3,14 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<div class="border-black border-solid border-4 rounded-2xl text-center mx-96 p-10 mt-24">
+<div class="border-black border-solid border-4 rounded-2xl text-center mx-96 p-10 mt-24"> 
     <div>
         <h1 class="text-4xl font-bold">퀴즈 정보</h1>
     </div>
     <div>
         <div class="h-40 pt-20 text-xl">
         {% for quiz in quizs %}
-        <a href="{% url 'quizs:detail' quiz.pk %}">{{quiz.question}}</a><br>
+        <a href="{% url 'quizs:detail' quiz.pk %}" class="no-underline hover:underline">{{quiz.question}}</a><br>
         {% endfor %}
         </div>
         <div class="pt-40">
