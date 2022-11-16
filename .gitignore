@@ -11,3 +11,4 @@ Pipfile.lock
 *.pyc
 __pycache__/
 local_settings.py
+package.json
