@@ -58,3 +58,4 @@ urllib3==1.26.12
 wcwidth==0.1.9
 websocket-client==0.59.0
 whitenoise==6.2.0
+psycopg2==2.6.2
