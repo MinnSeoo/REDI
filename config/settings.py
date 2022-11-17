@@ -107,7 +107,7 @@ else:
             "NAME": "redidi",
             "USER": "name",
             "PASSWORD": "",
-            "HOST": "localhost",
+            "HOST": "redi-fbit.herokuapp.com",
             "PORT": "",
         }
     }
