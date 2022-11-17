@@ -185,7 +185,6 @@ EMAIL_USE_TLS = True
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
 
