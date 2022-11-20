@@ -23,14 +23,13 @@ class UserHomeView(mixins.LoggedInOnlyView, TemplateView):
     def get(self, request, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         qs = models.User.objects.order_by("-exp")
+        count = qs.count()
+        if count > 10:
+            rank_list = list(qs)[:10]
+        else:
+            rank_list = list(qs)
 
-        rank_list = []
-        count = 0
-        for user in qs:
-            rank_list.append({count + 1: user})
-            count += 1
-            if count == 10:
-                break
+        rank_list = list(map(lambda user: {rank_list.index(user) + 1: user}, rank_list))
 
         context["user_rank_list"] = rank_list
         return super().get(request, *args, **kwargs)
