@@ -86,6 +86,7 @@ class HistoryLogsView(mixins.LoggedInOnlyView, DetailView):
         if form.is_valid():
             history.memo = form.cleaned_data.get("memo")
             history.save()
+            messages.success(request, "메모를 저장했습니다.")
             return redirect(reverse("histories:log", kwargs={"pk": pk, "date": date}))
 
 
