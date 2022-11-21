@@ -4,21 +4,24 @@
 
 {% block content %}
     <div class = "">일회용품 정보</div>
-    
-    <div class="mt-11 ml-11 rounded-full w-60 bg-green-50 p-5 text-center">
-        {% if user.is_superuser %}
-            <a href ="{% url 'garbages:gb-add' %}">일회용품 추가</a>
-        {% endif %}
-    </div>
+
+    {% if user.is_superuser %}
+    <a href ="{% url 'garbages:gb-add' %}" class = "text-green-700 font-semibold">
+        <div class="mt-11 ml-11 rounded-full border-2 border-green-100 w-60 bg-green-50 p-5 text-center">
+            일회용품 추가
+        </div>
+    </a>
+    {% endif %}
         
     
     {% for garbage in garbages %}
-        <div class = "border-2 p-3 text-center w-80 h-72 rounded-3xl inline-flex ml-36 mt-11 text-xl ">
-        <a href="{% url 'garbages:gb-detail' garbage.pk %}">{{garbage.name}}</a><br>
+        <div class = "border-4 border-blue-100 p-3 text-center w-80 h-72 rounded-3xl inline-flex ml-36 mt-11 text-xl">
+        <a href="{% url 'garbages:gb-detail' garbage.pk %}" class = "mr-auto mb-auto ml-auto mt-auto 
+        text-2xl font-bold">{{garbage.name}}</a><br>
         </div>
     {% endfor %}
 
-    <div class = "mt-16 text-center">
+    <div class = "mt-12 text-center">
     {% if page_obj.has_previous %}
          <a href="?page={{page_obj.previous_page_number}}">
             <img src="https://ifh.cc/g/2DMHxx.png" class = "w-7 inline-block">

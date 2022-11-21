@@ -1,0 +1,62 @@
+.s-explain {
+    position: fixed;
+    margin-left: 4.5cm;
+    margin-top: 3.2cm;
+}
+
+
+.s-h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: green;
+}
+
+.s-h3 {
+    font-size: 19.2px;
+    font-weight: 600;
+}
+
+.s-login {
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 4px;
+    border-color: gray;
+    position: fixed;
+    right: 4cm;
+    bottom: 2.5cm;
+    margin: 10px;   
+    padding: 4px;
+    height: 480px;
+    width: 430px;
+}
+
+.s-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.signup-form {
+    position: relative;
+    bottom: 2cm;
+    margin-bottom: 20px;
+    font-size: 18.5px;
+    margin-left: 10px;
+}
+
+.bt-signup {
+    position: relative;
+    bottom: 2cm;
+    margin-left: 3.7cm;
+    margin-right: 3.7cm;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    outline-style: solid;
+    outline-color: gray;
+    border-radius: 20px
+}
+
+.bt-signup:hover {
+    outline-color: #bdef90;
+}

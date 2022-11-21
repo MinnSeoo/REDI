@@ -7,10 +7,17 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
+        <div class="form-group border-2 inline-grid ml-14 font-light rounded-lg">
             {{field.label}}
             {{field}}
+            {% if field.field.widget.input_type == "text" %}
+                
+            {% elif field.field.widget.input_type == "file" %}
+                
+            {% endif %}
+        </div>
         {% endfor %}
-        <button>add</button>
+        <button class = "rounded-lg w-14 bg-blue-200 p-1 ml-8">add</button>
     </form>
 
     <div class = "mt-60 ml-3 rounded-full bg-purple-50 w-44 p-3 text-center">
