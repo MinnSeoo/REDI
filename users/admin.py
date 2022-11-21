@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
     """Custom User Admin Definition"""
 
     fieldsets = UserAdmin.fieldsets + (
-        ("Custom Profile", {"fields": ("avatar", "login_method")}),
+        ("Custom Profile", {"fields": ("avatar", "login_method", "exp")}),
     )
 
     list_filter = UserAdmin.list_filter + ("login_method",)
