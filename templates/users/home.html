@@ -35,11 +35,16 @@
                 <div class = "h-quizs">
                     <br>
                     <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-20 inline-block relative right-24">
-                        <a href="{% url 'quizs:home' %}">퀴즈 풀기</a>
+                        <a href="{% url 'quizs:home' %}">퀴즈 수정</a>
                     <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-20 inline-block relative left-24">
                 </div>
                 {% else %}
-                    <a href="{% url 'quizs:find' %}">퀴즈</a>        
+                <div class = "h-quizs">
+                    <br>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-20 inline-block relative right-24">
+                        <a href="{% url 'quizs:find' %}">퀴즈 풀기</a>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4858/4858456.png " class = "h-20 inline-block relative left-24">
+                </div>
                 {% endif %}
                 </article> 
         </section>
