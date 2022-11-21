@@ -3,24 +3,43 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <div class="border-4 border-solid border-black mx-96 rounded-xl h-96 text-center">
+    <div class="border-4 border-solid border-black mx-96 rounded-xl text-center pb-20">
         
-        <h1 class="font-bold text-2xl p-10">퀴즈 디테일</h1>
-        {{quiz.question}}<br>
-        {{quiz.points}}<br>
-        
-        <a href="{% url 'quizs:edit' quiz.pk %}">퀴즈 수정</a>
-        <a href="{% url 'quizs:delete' quiz.pk %}">퀴즈 삭제</a>
-        
-        <a href="{% url 'quizs:add-answer' quiz.pk %}">답 추가</a>
-        {% for answer in quiz.get_every_answers %}
-        <div>
-            {{answer.context}}
-            {{answer.is_correct}}
-            <a href="{% url 'quizs:edit-answer' quiz.pk answer.pk %}" >수정</a>
-            <a href="{% url 'quizs:delete-answer' quiz.pk answer.pk %}" >삭제</a>
+        <h1 class="font-bold text-4xl p-10">퀴즈 디테일</h1>
+        <div class="text-xl">
+            <p class="text-2xl">퀴즈 : {{quiz.question}}<br><br></p>
+            <p class="text-right pr-32">점수 : {{quiz.points}}<br></p>
+            <span class="mb-3">
+                {% for answer in quiz.get_every_answers %}
+                <div class="my-4">
+                    {{answer.context}}
+                    <span class="font-bold">{{answer.is_correct}}</span>
+                    <div class="inline-flex">
+                        <button class="bg-red-300 hover:bg-red-400 text-black font-bold px-1 rounded-l">
+                            <a href="{% url 'quizs:edit-answer' quiz.pk answer.pk %}" class="text-base">수정</a>
+                        </button>
+                        <button class="bg-blue-300 hover:bg-blue-400 text-black font-bold px-1 rounded-r">
+                            <a href="{% url 'quizs:delete-answer' quiz.pk answer.pk %}" class="text-base">삭제</a>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </span>
+            <div class="pt-10">
+                <button class="text-black font-bold px-1 -mx-1 rounded-l border border-solid border-black hover:border-gray-300 hover:text-gray-500">
+                    <a href="{% url 'quizs:edit' quiz.pk %}">퀴즈 수정
+                    <img src="https://ifh.cc/g/67kpqD.png" class="w-5 inline-block pb-1"></a>
+                </button>
+                <button class="text-black font-bold -mx-1 px-1 border border-solid border-black hover:border-gray-300 hover:text-gray-500">
+                    <a href="{% url 'quizs:delete' quiz.pk %}">퀴즈 삭제
+                    <img src="https://ifh.cc/g/LkOjf3.png" class="w-5 inline-block pb-1"></a>
+                </button>
+                <button class="text-black font-bold px-1 -mx-1 rounded-r border border-solid border-black hover:border-gray-300 hover:text-gray-500">
+                    <a href="{% url 'quizs:add-answer' quiz.pk %}">답 추가
+                    <img src="https://ifh.cc/g/WpwhPo.png" class="w-5 inline-block pb-1"></a>
+                </button>
+            </div>
         </div>
-        {% endfor %}
     </div>
 
 {% endblock content %}
