@@ -27,7 +27,7 @@ class SuperUserOnlyView(LoggedInOnlyView, UserPassesTestMixin):
     """user가 superuser가 아니면 404 에러"""
 
     def test_func(self):
-        return self.request.user.is_superuser
+        return self.request.user.is_staff
 
     def handle_no_permission(self):
         raise Http404()
