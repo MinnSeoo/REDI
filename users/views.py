@@ -174,7 +174,7 @@ class PasswordResetView(mixins.LoggedOutOnlyView, FormView):
 
 def kakao_login(request):
     client_id = os.environ.get("KAKAO_ID")
-    redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
+    redirect_uri = "http://redi.live/users/login/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
@@ -188,7 +188,7 @@ def kakao_callback(request):
     try:
         code = request.GET.get("code")
         client_id = os.environ.get("KAKAO_ID")
-        redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
+        redirect_uri = "http://redi.live/users/login/kakao/callback"
         token_request = requests.get(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
         )
@@ -231,7 +231,7 @@ def kakao_callback(request):
 
 def discord_login(request):
     client_id = os.environ.get("DISCORD_ID")
-    redirect_uri = "http://127.0.0.1:8000/users/login/discord/callback"
+    redirect_uri = "http://redi.live/users/login/discord/callback"
     return redirect(
         f"https://discord.com/oauth2/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&prompt=consent&scope=identify%20email"
     )
@@ -279,7 +279,7 @@ def discord_callback(request):
 
 def exchange_code(code):
     try:
-        redirect_uri = "http://127.0.0.1:8000/users/login/discord/callback"
+        redirect_uri = "http://redi.live/users/login/discord/callback"
         client_id = os.environ.get("DISCORD_ID")
         client_secret = os.environ.get("DISCORD_SECRET")
         data = {
