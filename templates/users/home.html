@@ -9,7 +9,6 @@
                     <img src="https://ifh.cc/g/3JnDas.png" class = "h-20 inline-block relative right-20">
                         <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
                     <img src="https://ifh.cc/g/3JnDas.png" class = "h-20 inline-block relative left-20">
-                    
                 </div>
                 <div class = "h-refrm">
                     <div class = "h-trash ">
@@ -48,6 +47,9 @@
                 {% endif %}
                 </article> 
         </section>
-        <div class = "q-rank">퀴즈 순위</div>
+        <div class = "q-rank">퀴즈 순위
+            {{ user_rank_list }}
+        </div>
+        
     </main>  
 {% endblock content %}

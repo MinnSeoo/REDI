@@ -10,10 +10,10 @@
     <div>
         <div class="h-40 pt-20 text-xl">
         {% for quiz in quizs %}
-        <a href="{% url 'quizs:detail' quiz.pk %}" class="no-underline hover:underline">{{quiz.question}}</a><br>
+        <a href="{% url 'quizs:detail' quiz.pk %}" class="grid grid-flow-col no-underline hover:underline">{{quiz.question}}</a><br>
         {% endfor %}
         </div>
-        <div class="pt-40">
+        <div class="pt-52">
             <div class="pb-5">
             {% if page_obj.has_previous %}
             <a href="?page={{page_obj.previous_page_number}}">

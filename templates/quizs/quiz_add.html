@@ -11,8 +11,9 @@
         {{field.label}}
         {{field}}
         {% endfor %}
-        <div class="flex flex-row-reverse pt-10">
-            <button class="ml-10 border-2 border-solid border-black px-4 py-1 rounded-full"><img src="https://ifh.cc/g/QrqJ3Z.png" class="w-7 inline-block">추가</button>
+        <div class="flex justify-end mt-3">
+            <a href="{% url 'quizs:home' %}"><div class=" border-2 border-solid border-black px-5 py-1 rounded-full">취소</div></a>
+            <button class="ml-10 border-2 border-solid border-black px-4 rounded-full"><img src="https://ifh.cc/g/QrqJ3Z.png" class="w-7 inline-block">추가</button>
         </div>
     </form>
 </div>
