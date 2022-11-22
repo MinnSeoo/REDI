@@ -59,8 +59,19 @@
                 {% endif %}
                 </article> 
         </section>
-        <div class = "q-rank">퀴즈 순위
-            {{ user_rank_list }}
+        <div class="q-rank flex flex-col items-center rounded-xl">
+            <div class="m-5 text-2xl border w-52 py-1 rounded-md">퀴즈 순위</div>
+            <ul>
+                {% for user_dict in user_rank_list %}
+    
+                {% for rank, user in user_dict.items %}
+                    <li>
+                        <span>{{ rank }}</span> <span>{{ user }}</span>
+                    </li>
+                {% endfor %}
+    
+                {% endfor %}
+            </ul>
         </div>
         
     </main>  

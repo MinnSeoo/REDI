@@ -20,7 +20,7 @@ class UserHomeView(mixins.LoggedInOnlyView, TemplateView):
 
     template_name = "users/home.html"
 
-    def get(self, request, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         qs = models.User.objects.order_by("-exp")
         count = qs.count()
@@ -32,7 +32,7 @@ class UserHomeView(mixins.LoggedInOnlyView, TemplateView):
         rank_list = list(map(lambda user: {rank_list.index(user) + 1: user}, rank_list))
 
         context["user_rank_list"] = rank_list
-        return super().get(request, *args, **kwargs)
+        return context
 
 
 class LoginView(mixins.LoggedOutOnlyView, FormView):
