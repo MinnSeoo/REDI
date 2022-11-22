@@ -1,4 +1,4 @@
-<header class=" flex-wrap p-4 flex-col md:flex-row items-center inset-0 fixed bg-white w-full h-20 border-b flex  text-gray-600 body-font z-20">
+<header class=" flex-wrap p-4 flex-col md:flex-row items-center inset-0 fixed w-full h-20 border-b flex  text-gray-600 body-font z-20">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <a href="{% url 'core:home' %}">
       
@@ -23,7 +23,7 @@
                     <div class=" bg-white flex flex-row-reverse">
                         <ul class ="w-32 text-sm font-medium text-gray-900 bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600  rounded-lg dark:text-white">
                             <li class = "text-center"> 
-                                <span onclick="location.href='#'" class = "menu-options">내 프로필</span>
+                                <span onclick="location.href='{% url 'users:profile' request.user.username %}'" class = "menu-options">내 프로필</span>
                             </li> 
                             <li class = "text-center">
                                 <span onclick ="location.href='#'" class = "menu-options">정보수정</span>
