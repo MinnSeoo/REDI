@@ -9,7 +9,7 @@ from . import models, forms
 class PostListView(mixins.LoggedInOnlyView, ListView):
 
     model = models.MyPost
-    paginate_by = 3
+    paginate_by = 10
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "posts"
