@@ -3,28 +3,39 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>커뮤니티</h1>
+<div class="bg-red-50">
     
-    <a href ="{% url 'posts:add' %}">글 쓰기</a>
+    <a href ="{% url 'posts:add' %}">글 쓰기</a >
+    
+    <div class="w-3/5 bg-blue-50 flex flex-col">
+        <ul>
+            {% for post in posts %}
+                <a href="{% url 'posts:detail' post.pk %}">
+                    <li>
+                        <img src="{{ post.user.avatar.url }}"> {{post.user.username}} {{post.title}} {{post.get_likes}} {{post.get_comment_num}}
+                    </li>
+                </a>
+                {% if post.is_today %} {{post.get_time_part}} {% else %} {{post.get_date_part}} {% endif %}
+            {% endfor %}
+        </ul>
         
-
-    {% for post in posts %}
-        <a href="{% url 'posts:detail' post.pk %}">{{post.title}}</a><br>
-    {% endfor %}
-
-    {% if page_obj.has_previous %}
-         <a href="?page={{page_obj.previous_page_number}}">
-            pre
-        </a>
-    {% endif %}
-
-    <span >{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
-
-    {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">
-           next
-        </a>
-    {% endif %}
+        <div class="w-56 mx-auto flex justify-center mt-8">
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}" class="mr-3 rounded-full bg-gray-50 py-1 px-3 border border-gray-100">
+                    이전
+                </a>
+            {% endif %}
+            
+            <span class="rounded-full bg-green-50 py-1 px-3 border-gray-100">{{page_obj.number}} / {{page_obj.paginator.num_pages}}</span>
+            
+            {% if page_obj.has_next  %}
+                <a href="?page={{page_obj.next_page_number}}" class="ml-3 rounded-full bg-gray-50 py-1 px-3 border-gray-100">
+                다음
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
     

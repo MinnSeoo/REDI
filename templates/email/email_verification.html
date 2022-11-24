@@ -1,8 +1,6 @@
 {% autoescape off %}
 
-안녕하세요! {{ name }}님
-smtp를 사용하여 이메일을 발송하였습니다.
-{{ name }}님이 요청한게 아니라면 이메일을 무시해주시기 바랍니다.
-<a href="http://redi.live/verify/{{ secret }}">클릭</a>
+안녕하세요! {{ name }}님<br>
+이메일 인증을 하려면 <a href="http://redi.live/users/verify/{{ secret }}">클릭</a>하세요
 
 {% endautoescape %}

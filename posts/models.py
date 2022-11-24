@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from core.models import CustomModelImageField
 from django.shortcuts import reverse
@@ -17,6 +18,18 @@ class BaseTextModel(models.Model):
 
     def get_likes(self):
         return self.likes.count()
+
+    def get_comment_num(self):
+        return self.comments.count()
+
+    def is_today(self):
+        return datetime.datetime.now().date() == self.created.date()
+
+    def get_date_part(self):
+        return self.created.date()
+
+    def get_time_part(self):
+        return self.created.time()
 
 
 class MyPost(BaseTextModel):
