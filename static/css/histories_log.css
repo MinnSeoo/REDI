@@ -16,5 +16,12 @@
 }
 
 .hs-field {
-    display: flex;
+    margin-top: 2px;
+}
+
+.hs-correction {
+    color: purple;
+    font-weight: bold;
+    position: relative;
+    left: 2px;
 }
