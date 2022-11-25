@@ -3,33 +3,11 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
+    <h1>쓰레기 디테일</h1>
+    <a href="{% url 'garbages:rm-update' replacement.pk %}">수정하기</a>
+    <a href="{% url 'garbages:rm-delete' replacement.pk %}">지우기</a>
+    {{replacement.name}}
 
-    
-
-    <div class = "text-center font-semibold text-lg border-4 rounded-xl border-blue-200 bg-blue-50 text-blue-700 ml-auto mr-auto w-60 p-2 mt-5">
-        {{replacement.name}}
-    </div>
-
-    <div class = "border-4 rounded-full mt-5 ml-auto mr-auto w-72 h-72 bg-cover border-yellow-200" 
-        style="background-image:url('{{replacement.icon.url}}')">
-    </div>
-
-    <div class = "border-4 rounded-xl w-2/5 h-auto p-3 mt-5 mx-auto flex justify-items-start font-semibold text-gray-500">
-        설명 : {{replacement.description}}
-    </div>
-
-    <div class = "border-4 border-green-100 rounded-full p-5 w-60 h-20 mr-20 ml-96 mt-4 inline-block bg-green-50 text-lg text-center">
-        <a href="{% url 'garbages:rm-update' replacement.pk %}" class = "text-green-700 font-semibold mr-auto ml-auto
-        mt-auto mb-auto">수정하기</a>
-    </div>
-
-    <div class = "border-4 border-red-100 rounded-full p-5 w-60 h-20 mt-4 ml-40 inline-block bg-red-50 text-lg text-center">
-        <a href="{% url 'garbages:rm-delete' replacement.pk %}" class = "text-red-700 font-semibold">지우기</a>
-    </div>
-
-    <div class = "ml-3 mt-9 border-4 rounded-full bg-purple-50 border-purple-100 text-purple-700 font-semibold w-44 p-3 text-center">
-        <a href="{% url 'garbages:rm-list' %}">쓰레기 정보</a>
-    </div>
-
+    <a href="{% url 'garbages:rm-list' %}">쓰레기 정보</a>
 {% endblock content %}
     

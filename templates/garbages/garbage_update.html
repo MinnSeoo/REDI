@@ -3,25 +3,14 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
+    <h1>쓰레기 수정</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-        <div class="mt-12 border-4 w-96 m-auto border-green-100 rounded-lg">
-            <div class = "border-b-2 w-96 border-gray-100 flex justify-center font-semibold text-green-700 p-1">
-                {{field.label}}
-            </div>
-
-            <div class = "p-2 flex justify-center">
-                {{field}}
-            </div>
-
-        </div>
+            {{field.label}}
+            {{field}}
         {% endfor %}
-
-        <div class="flex justify-center mt-10">
-            <button class = "rounded-full w-32 border-4 bg-red-100 border-red-200 text-red-700 font-semibold p-1 ml-8">edit</button>
-        </div>
-
+        <button>edit</button>
     </form>
 
 {% endblock content %}
