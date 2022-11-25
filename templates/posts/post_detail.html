@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <form class="h-14 flex items-center justify-center mt-3" method="POST" enctype="multipart/form-data">
+    <form class="h-14 flex items-center justify-center my-3" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="bg-cover bg-center w-12 h-12 opacity-50"
             style="background-image: url('/static/icons/chat_1.png')"
@@ -77,7 +77,8 @@
         type="text" name="context" maxlength="50" required id="id_context">
     </form>
     
-    <ul class="border-t-2 mt-3 mb-7 flex flex-col items-center">
+    {% if post.get_comments %}
+    <ul class="border-t-2 mb-7 flex flex-col items-center">
         {% for comment in post.get_comments %}
         <li class="w-5/6 h-20 border-b mt-3 flex items-center rounded-lg justify-between">
             <div class="flex items-center w-3/4">
@@ -109,6 +110,7 @@
         </li>
     {% endfor %}
     </ul>
+    {% endif %}
 
 </div>
 
