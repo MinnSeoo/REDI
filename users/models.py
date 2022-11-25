@@ -94,3 +94,17 @@ class User(AbstractUser):
 
     def get_histories(self):
         return self.histories.order_by("date")
+
+    def get_amount_of_garbages(self):
+        histories = self.get_histories()
+        count = 0
+        for history in histories:
+            count += history.get_garbage_amount()
+        return count
+
+    def get_total_value(self):
+        histories = self.get_histories()
+        count = 0
+        for history in histories:
+            count += history.get_total_value()
+        return count

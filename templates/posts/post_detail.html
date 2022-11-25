@@ -3,49 +3,117 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>{{post.title}}</h1>
-    {{post.user}}<br>
-    created : {{post.created}}<br>
-    updated : {{post.updated}}<br>
-    {{post.context}}<br>
-    likes : {{post.get_likes}}<br>
+<div class="mt-32">
+    <a class="mx-auto" href="{% url 'posts:home' %}">
+        <div class="text-xl">커뮤니티로 돌아가기</div>
+    </a>    
+</div>
 
-    <a href="{% url 'posts:toggle-post-like' post.pk %}">
-        {% if request.user in post.likes.all %}
-        remove like
-        {% else %}
-        give like
-        {% endif %}
-    </a>
-        
+<div class="w-3/5 mx-auto border-2 rounded-md">
 
-    
-    {% if post.user.pk == request.user.pk %}
-        <a href="{% url 'posts:post-delete' post.pk %}">지우기</a>
-        <a href="{% url 'posts:edit' post.pk %}">수정하기</a>
+    <div class="flex justify-between items-center h-28 w-full border-b-2">
+        <div class="flex items-center">
+            <div class="bg-cover bg-center rounded-full border w-20 h-20 ml-8" {% if post.user.avatar %}style="background-image: url('{{ post.user.avatar.url }}')"{% endif %} ></div>
+            <div class="ml-12 text-2xl ">{{post.user}}</div>
+        </div>
+        <div class="mr-14 flex items-center text-4xl">
+            <a href="{% url 'posts:toggle-post-like' post.pk %}">
+                <div class="bg-cover bg-center w-14 h-14"
+                {% if request.user in post.likes.all %}
+                    style="background-image: url('/static/icons/heart_1.png')"
+                {% else %}
+                    style="background-image: url('/static/icons/heart_2.png'); opacity: 0.7"
+                {% endif %} 
+                ></div>
+            </a>
+            <span class="ml-5">
+                {{post.get_likes}}
+            </span>
+        </div>
+    </div>
+    <div class="mx-8 flex flex-col mb-10">
+        <h1 class="text-4xl my-4">{{post.title}}</h1>
+        <p>
+            {{post.context}}
+        </p>
+    </div>
+    {% if post.picture %}
+        <img src="{{post.picture.url}}" class="mb-10 mx-auto">
     {% endif %}
 
-    <form method="POST" enctype="multipart/form-data">
+    <div class="flex justify-between border-b-2 pr-8 h-28 items-center">
+        <div class="flex flex-col">
+            <div class="ml-8 text-sm text-gray-400 w-40 flex">
+                {% if post.is_today %} 
+                    {{post.get_time_part}} 
+                {% else %} 
+                    {{post.get_date_part|date:"Y-m-d"}} 
+                {% endif %}
+                업로드
+            </div>
+            <div class="ml-8 text-sm text-gray-400 w-40 flex">
+                {% if post.is_today %} 
+                    {{post.get_update_time_part}} 
+                {% else %} 
+                    {{post.get_update_date_part|date:"Y-m-d"}} 
+                {% endif %}
+                수정
+            </div>
+        </div>
+        <div class="flex flex-col items-center">
+            {% if post.user.pk == request.user.pk %}
+                <a class="bg-red-50 py-1 rounded-md mb-3 w-24 flex justify-center" href="{% url 'posts:post-delete' post.pk %}">지우기</a>
+                <a class="bg-blue-50 py-1 rounded-md w-24 flex justify-center" href="{% url 'posts:edit' post.pk %}">수정하기</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <form class="h-14 flex items-center justify-center my-3" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        
-        {% for field in form %}
-            {{field}}
-        {% endfor %}
-            
-        <button>comment</button>
+        <div class="bg-cover bg-center w-12 h-12 opacity-50"
+            style="background-image: url('/static/icons/chat_1.png')"
+            ></div>
+        <input class="h-10 w-4/5 text-xl border border-gray-300 rounded-md focus:outline-none pl-4 ml-2"
+        type="text" name="context" maxlength="50" required id="id_context">
     </form>
     
-    {% for comment in post.comments.all %}
-        <div>
-            <a href="{% url 'users:profile' comment.user.username %}">{{comment.user}}</a> - {{comment.context}} 
-            {% if request.user == comment.user %}
-                <a href="{% url 'posts:comment-delete' post.pk comment.pk %}">지우기</a>
-            {% endif %}
-            <a href="{% url 'posts:toggle-comment-like' comment.pk %}" >좋아요</a> : {{comment.likes.count}}
-        </div>
+    {% if post.get_comments %}
+    <ul class="border-t-2 mb-7 flex flex-col items-center">
+        {% for comment in post.get_comments %}
+        <li class="w-5/6 h-20 border-b mt-3 flex items-center rounded-lg justify-between">
+            <div class="flex items-center w-3/4">
+                <a class="flex items-center" href="{% url 'users:profile' comment.user.username %}">
+                    <div class="bg-cover bg-center rounded-full border w-14 h-14 ml-4" {% if comment.user.avatar %}style="background-image: url('{{ comment.user.avatar.url }}')"{% endif %} ></div>
+                    <div class="mx-3 text-lg text-gray-400">{{comment.user}}</div>
+                </a>
+                <div class="ml-2 w-full truncate">{{comment.context}}</div>
+            </div>
+            <div class="mr-6 flex">
+                {% if request.user == comment.user %}
+                    <a class="mr-8 bg-gray-100 rounded-md py-1 px-2" href="{% url 'posts:comment-delete' post.pk comment.pk %}">지우기</a>
+                {% endif %}
+                <div class="flex items-center text-xl">
+                    <a href="{% url 'posts:toggle-comment-like' comment.pk %}">
+                        <div class="bg-cover bg-center w-8 h-8 relative top-1/2"
+                        {% if request.user in comment.likes.all %}
+                            style="background-image: url('/static/icons/heart_1.png')"
+                        {% else %}
+                            style="background-image: url('/static/icons/heart_2.png'); opacity: 0.7"
+                        {% endif %} 
+                        ></div>
+                    </a>
+                    <span class="ml-2">
+                        {{comment.likes.count}}
+                    </span>
+                </div>
+            </div>
+        </li>
     {% endfor %}
+    </ul>
+    {% endif %}
 
-    <a href="{% url 'posts:home' %}">커뮤니티</a>
+</div>
+
         
 {% endblock content %}
     
