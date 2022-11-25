@@ -40,6 +40,11 @@ class GarbageAddView(mixins.SuperUserOnlyView, FormView):
     template_name = "garbages/garbage_add.html"
     form_class = forms.GarbageForm
     success_url = reverse_lazy("garbages:gb-list")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["replacements"] = models.Replacement.objects.all()
+        return context
 
     def form_valid(self, form):
 

@@ -3,14 +3,25 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>대체품 수정</h1>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-            {{field.label}}
-            {{field}}
-        {% endfor %}
-        <button>edit</button>
+        
+        <div class="mt-12 border-4 w-96 m-auto border-purple-100 rounded-lg">
+            <div class = "border-b-2 w-96 border-gray-100 flex justify-center font-semibold text-purple-700 p-1">
+                {{field.label}}
+            </div>
+
+            <div class = "p-2 flex justify-center">
+                {{field}}
+            </div>
+        </div>
+        
+            {% endfor %}
+            <div class="flex justify-center mt-10">
+        <button class = "rounded-full w-32 border-4 bg-red-100 border-red-200 text-red-700 font-semibold p-1">edit</button>
+            </div>
     </form>
 
 {% endblock content %}
