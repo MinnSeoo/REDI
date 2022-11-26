@@ -3,7 +3,6 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <div class = "">일회용품 정보</div>
 
     {% if user.is_superuser %}
     <a href ="{% url 'garbages:gb-add' %}" class = "text-green-700 font-semibold">

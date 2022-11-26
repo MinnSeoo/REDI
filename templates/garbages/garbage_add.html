@@ -3,24 +3,54 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <h1>쓰레기 추가</h1>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-        <div class="form-group border-2 inline-grid ml-14 font-light rounded-lg">
-            {{field.label}}
-            {{field}}
-            {% if field.field.widget.input_type == "text" %}
-                
-            {% elif field.field.widget.input_type == "file" %}
-                
-            {% endif %}
+        <div class="mt-12 border-4 w-96 m-auto border-green-100 rounded-lg">
+            <div class = "border-b-2 w-96 border-gray-100 flex justify-center font-semibold text-green-700 p-1">
+                {{field.label}}
+            </div>
+            <div class = "p-2 flex justify-center">
+                    {% if field.field.widget.input_type == "text" %}
+                    <div class = "" style = "m-auto align-center">
+                        <input type="{{ field.field.widget.input_type }}" class="ml-2" name="{{ field.name }}"
+                        id="{{ field.id_for_label }}" placeholder="{{ field.field.widget.attrs.placeholder }}"> 
+                    </div>
+
+                    {% elif field.field.widget.input_type == "file" %}
+                    <div class = "text-right">
+                        <input type="{{ field.field.widget.input_type }}" class="ml-2" name="{{ field.name }}"
+                        id="{{ field.id_for_label }}" placeholder="{{ field.field.widget.attrs.placeholder }}"> 
+                    </div>
+
+                    {% elif field.field.widget.input_type == "number" %}
+                        <input type="{{ field.field.widget.input_type }}" class="ml-2" name="{{ field.name }}"
+                        id="{{ field.id_for_label }}" placeholder="{{ field.field.widget.attrs.placeholder }}"> 
+
+
+                    {% elif field.field.widget.input_type == "select" %}
+                    <select name="replacements" id="id_replacements" multiple>
+                        {% for replacement in replacements %}
+                            <option value="{{replacement.pk}}">{{replacement.name}}</option>
+                        {% endfor %}
+                      </select>
+
+
+                    {% else %}
+                        <textarea class="" name="description" id="id_description" cols="80s" rows="10"></textarea>
+                    {% endif %}
+            </div>
         </div>
         {% endfor %}
-        <button class = "rounded-lg w-14 bg-blue-200 p-1 ml-8">add</button>
+
+        <div class="flex justify-center mt-10">
+            <button class = "rounded-full w-32 border-4 bg-blue-100 border-blue-200 text-blue-700 font-semibold p-2">add</button>
+        </div>    
+    
     </form>
 
-    <div class = "mt-60 ml-3 rounded-full bg-purple-50 w-44 p-3 text-center">
+    <div class = "mt-20 ml-3 border-4 rounded-full bg-purple-50 border-purple-100 text-purple-700 w-44 p-3 text-center text-pup">
         <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
     </div>
 
