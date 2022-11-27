@@ -17,7 +17,7 @@ class MyPost(models.Model):
     likes = models.ManyToManyField("users.User", related_name="likes", blank=True)
 
     title = models.CharField(max_length=50)
-    picture = CustomModelImageField(upload_to="post_pics", blank=True)
+    picture = CustomModelImageField(upload_to="post_pics", blank=True, null=True)
 
     def get_likes(self):
         return self.likes.count()
