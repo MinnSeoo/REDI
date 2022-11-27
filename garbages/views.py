@@ -10,7 +10,7 @@ from . import models, forms
 class GarbageListView(mixins.LoggedInOnlyView, ListView):
 
     model = models.Garbage
-    paginate_by = 3
+    paginate_by = 12
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "garbages"
@@ -19,7 +19,7 @@ class GarbageListView(mixins.LoggedInOnlyView, ListView):
 class ReplacementListView(mixins.LoggedInOnlyView, ListView):
 
     model = models.Replacement
-    paginate_by = 3
+    paginate_by = 12
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "replacements"

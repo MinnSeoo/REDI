@@ -4,7 +4,7 @@
 
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-<div class="flex h-75vh">
+<div class="flex h-75vh mb-12">
     <div class="w-3/5 my-12">
         <div class="flex justify-between pr-20 -mt-5">
             <h2 class="pl-20 text-3xl font-semibold font-sans border-2 border-gray-200 py-2 mb-3 pr-20 rounded-r-3xl flex" style="background-color: rgb(256,253,250)"><span class="max-w-xs block truncate mr-3">{{user.username}}</span>님의 통계</h2>
@@ -23,7 +23,7 @@
                     버린 쓰레기 수 : <span class="text-lg bg-blue-400 text-gray-50 px-2 py-px rounded-lg">{{user.get_amount_of_garbages}}</span>
                 </li>
                 <li class="mb-2">
-                    ~~ 수치 : <span class="text-lg bg-blue-400 text-gray-50 px-2 py-px rounded-lg">{{user.get_total_value}}</span>
+                    환경 수치 : <span class="text-lg bg-blue-400 text-gray-50 px-2 py-px rounded-lg">{{user.get_total_value}}</span>
                 </li>
             </ul>
         </div>
