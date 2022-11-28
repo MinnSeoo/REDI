@@ -10,12 +10,6 @@
         <p >{{quiz.question}}</p>
         <p class="flex border-4 border-double border-blue-100 rounded-lg w-28 h-12 justify-center">{{quiz.points}}</p>
     </div>
-    <div class="fixed bottom-0 left-0 h-10 p-4 w-full bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-        </span>&copy; 2022 FBIT. All Rights Reserved.
-        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray- dark:text-gray-400 sm:mt-0">
-        </ul>
-    </div>
     <br>
     <ol class="list-decimal">
         <div class = "grid gap-4 grid-cols-2 px-40">
@@ -25,7 +19,6 @@
             <a href="{% url 'quizs:check' quiz.pk answer.pk %}">
                 <div>
                     {{answer.context}}
-                    {{answer.is_correct}}
                 </div>
             </a>
         </div>
