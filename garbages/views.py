@@ -51,6 +51,11 @@ class GarbageAddView(mixins.SuperUserOnlyView, FormView):
         messages.success(self.request, "쓰레기를 추가했습니다!")
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["replacements"] = models.Replacement.objects.all()
+        return context
+
 
 class ReplacementAddView(mixins.SuperUserOnlyView, FormView):
 
@@ -107,6 +112,11 @@ class GarbageEditView(mixins.SuperUserOnlyView, UpdateView):
     def get_object(self):
         garbage = models.Garbage.objects.get(pk=self.kwargs["pk"])
         return garbage
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["replacements"] = models.Replacement.objects.all()
+        return context
 
 
 class ReplacementEditView(mixins.SuperUserOnlyView, UpdateView):

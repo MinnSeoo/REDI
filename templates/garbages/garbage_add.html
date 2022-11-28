@@ -17,7 +17,7 @@
             </div>
             <div class = "p-2 flex justify-center">
                     {% if field.field.widget.input_type == "text" %}
-                    <div class = "" style = "m-auto align-center">
+                    <div>
                         <input type="{{ field.field.widget.input_type }}" class="ml-2" name="{{ field.name }}"
                         id="{{ field.id_for_label }}" placeholder="{{ field.field.widget.attrs.placeholder }}"> 
                     </div>
@@ -42,7 +42,7 @@
 
 
                     {% else %}
-                        <textarea class="" name="description" id="id_description" cols="80s" rows="10"></textarea>
+                        <textarea class="resize-none" name="description" id="id_description" cols="80" rows="10"></textarea>
                     {% endif %}
             </div>
         </div>
