@@ -3,7 +3,7 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <main class = "h-main">
+    <main class = "h-main mb-12">
         <section class = "h-section">
                 <div class = "h-trash">
                 <a href="{% url 'garbages:gb-list' %}">
@@ -59,18 +59,51 @@
                 {% endif %}
                 </article> 
         </section>
-        <div class="q-rank flex flex-col items-center rounded-xl">
-            <div class="m-5 text-2xl border w-52 py-1 rounded-md">퀴즈 순위</div>
-            <ul>
+        <div class="q-rank flex flex-col items-center rounded-xl border border-gray-50">
+            <div class="m-5 text-2xl border w-52 py-1 rounded-md ">퀴즈 리더보드</div>
+            <ul class="w-full flex flex-col items-center">
                 {% for user_dict in user_rank_list %}
     
                 {% for rank, user in user_dict.items %}
-                    <li>
-                        <span>{{ rank }}</span> <span>{{ user }}</span>
-                    </li>
+                    
+                    {% if rank == 1 %}
+                        <li class="flex justify-between w-4/5 h-14 items-center bg-gray-50 px-2 rounded-lg mt-3">
+                            <span class="rounded-lg w-9 h-9 flex justify-center items-center text-white" style="background-color: #ffd700">{{ rank }}</span>
+                            <div class="w-52 flex justify-between mr-10">
+                                <span class="w-32 text-left truncate text-gray-500">{{ user }}</span>
+                                <span class="w-10 text-center text-gray-400">{{ user.exp }}점</span>
+                            </div>
+                        </li>
+                    {% elif rank == 2 %}
+                        <li class="flex justify-between w-4/5 h-14 items-center bg-gray-50 px-2 rounded-lg mt-3">
+                            <span class="rounded-lg w-9 h-9 flex justify-center items-center text-white" style="background-color: #c0c0c0">{{ rank }}</span>
+                            <div class="w-52 flex justify-between mr-10">
+                                <span class="w-32 text-left truncate text-gray-500">{{ user }}</span>
+                                <span class="w-10 text-center text-gray-400">{{ user.exp }}점</span>
+                            </div>
+                        </li>
+                    {% elif rank == 3 %}
+                        <li class="flex justify-between w-4/5 h-14 items-center bg-gray-50 px-2 rounded-lg mt-3">
+                            <span class="rounded-lg w-9 h-9 flex justify-center items-center text-white" style="background-color: #cc8e34">{{ rank }}</span>
+                            <div class="w-52 flex justify-between mr-10">
+                                <span class="w-32 text-left truncate text-gray-500">{{ user }}</span>
+                                <span class="w-10 text-center text-gray-400">{{ user.exp }}점</span>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="flex justify-between w-4/5 h-14 items-center bg-gray-50 px-2 rounded-lg mt-3">
+                            <span class="rounded-lg w-9 h-9 flex justify-center items-center text-white bg-gray-300">{{ rank }}</span>
+                            <div class="w-52 flex justify-between mr-10">
+                                <span class="w-32 text-left truncate text-gray-500">{{ user }}</span>
+                                <span class="w-10 text-center text-gray-400">{{ user.exp }}점</span>
+                            </div>
+                        </li>
+                    {% endif %}
+                        
                 {% endfor %}
-    
+                        
                 {% endfor %}
+                
             </ul>
         </div>
         

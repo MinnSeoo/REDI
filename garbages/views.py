@@ -10,7 +10,7 @@ from . import models, forms
 class GarbageListView(mixins.LoggedInOnlyView, ListView):
 
     model = models.Garbage
-    paginate_by = 3
+    paginate_by = 12
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "garbages"
@@ -19,7 +19,7 @@ class GarbageListView(mixins.LoggedInOnlyView, ListView):
 class ReplacementListView(mixins.LoggedInOnlyView, ListView):
 
     model = models.Replacement
-    paginate_by = 3
+    paginate_by = 12
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "replacements"
@@ -50,6 +50,11 @@ class GarbageAddView(mixins.SuperUserOnlyView, FormView):
         form.save_m2m()
         messages.success(self.request, "쓰레기를 추가했습니다!")
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["replacements"] = models.Replacement.objects.all()
+        return context
 
 
 class ReplacementAddView(mixins.SuperUserOnlyView, FormView):
@@ -107,6 +112,11 @@ class GarbageEditView(mixins.SuperUserOnlyView, UpdateView):
     def get_object(self):
         garbage = models.Garbage.objects.get(pk=self.kwargs["pk"])
         return garbage
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["replacements"] = models.Replacement.objects.all()
+        return context
 
 
 class ReplacementEditView(mixins.SuperUserOnlyView, UpdateView):
