@@ -1,9 +1,12 @@
-<div class ="relative border-solid border-2 rounded  border-yellow-300 m-4 top-64">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png" class = "h-7  w-5 inline-block relative left-5">
-        <a href="{% url 'users:kakao-login' %}" class = "relative left-28">continue with kakao</a>
-    
-</div>
-<div class = "relative border-solid border-2 rounded border-blue-400 m-4 top-64">
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class = "h-7  w-5 inline-block relative left-5 ">
-    <a href="{% url 'users:discord-login' %}" class = "relative left-28">continue with discord</a>
-</div>
+<a href="{% url 'users:kakao-login' %}">
+    <div class="relative border-solid border-2 rounded  border-yellow-300 m-4 top-64 h-10 flex items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png" class = "h-7 w-7 relative left-5">
+        <span class="w-full text-center mr-10">카카오로 계속</span>
+    </div>
+</a>
+<a href="{% url 'users:discord-login' %}">
+    <div class="relative border-solid border-2 rounded border-blue-400 m-4 top-64 h-10 flex items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class = "h-7 w-7 relative left-5 ">
+        <span class="w-full text-center mr-10">디스코드로 계속</span>
+    </div>
+</a>

@@ -11,12 +11,14 @@
     {% endif %}
         
 
-    {% for replacement in replacements %}
-        <div class = "border-4 border-purple-100 p-3 text-center w-80 h-72 rounded-3xl inline-flex ml-36 mt-11 text-xl ">
-            <a href="{% url 'garbages:rm-detail' replacement.pk %}" class = "mr-auto mb-auto ml-auto mt-auto 
-            text-2xl font-bold">{{replacement.name}}</a><br>
-        </div>
-    {% endfor %}
+    <div class="grid gap-3 grid-cols-3 w-3/4 mx-auto">
+        {% for replacement in replacements %}
+            <a href="{% url 'garbages:rm-detail' replacement.pk %}" class = "border-4 border-purple-100 p-3 w-80 h-72 rounded-3xl mt-11 text-xl flex flex-col items-center">
+                <span class="bg-cover bg-center border w-36 h-36 rounded-full mt-5" style="background-image: url('{{replacement.icon.url}}')"></span>
+                <span class = "text-2xl font-bold mt-5">{{replacement.name}}</span>
+            </a>
+        {% endfor %}
+    </div>
 
     <div class = "mt-12 text-center">
     {% if page_obj.has_previous %}

@@ -4,6 +4,10 @@
 
 {% block content %}
 
+<div class = "mt-10 ml-3 border-4 rounded-full bg-purple-50 border-purple-100 text-purple-700 w-44 p-3 text-center text-pup">
+    <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
+</div>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
@@ -13,7 +17,7 @@
             </div>
             <div class = "p-2 flex justify-center">
                     {% if field.field.widget.input_type == "text" %}
-                    <div class = "" style = "m-auto align-center">
+                    <div>
                         <input type="{{ field.field.widget.input_type }}" class="ml-2" name="{{ field.name }}"
                         id="{{ field.id_for_label }}" placeholder="{{ field.field.widget.attrs.placeholder }}"> 
                     </div>
@@ -38,7 +42,7 @@
 
 
                     {% else %}
-                        <textarea class="" name="description" id="id_description" cols="80s" rows="10"></textarea>
+                        <textarea class="resize-none" name="description" id="id_description" cols="80" rows="10"></textarea>
                     {% endif %}
             </div>
         </div>
@@ -50,9 +54,6 @@
     
     </form>
 
-    <div class = "mt-20 ml-3 border-4 rounded-full bg-purple-50 border-purple-100 text-purple-700 w-44 p-3 text-center text-pup">
-        <a href="{% url 'garbages:gb-list' %}">쓰레기 정보</a>
-    </div>
 
 {% endblock content %}
     
