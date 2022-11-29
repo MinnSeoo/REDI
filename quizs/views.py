@@ -107,7 +107,7 @@ def delete_quiz(request, pk):
 
 class QuizListView(mixins.SuperUserOnlyView, ListView):
     model = models.Quiz
-    paginate_by = 3
+    paginate_by = 6
     # paginate_orphans =
     ordering = "-pk"
     context_object_name = "quizs"
