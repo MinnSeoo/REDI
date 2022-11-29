@@ -6,7 +6,7 @@
     <form method="POST">
         {% csrf_token %}
         {% for field in form %}
-        <div class="mt-12 border-4 w-96 m-auto border-purple-100 rounded-lg">
+        <div class="mt-6 border-4 w-96 m-auto border-purple-100 rounded-lg">
             <div class = "border-b-2 w-96 border-gray-100 flex justify-center font-semibold text-purple-700 p-1">
                 {{field.label}}
             </div>

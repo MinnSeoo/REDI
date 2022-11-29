@@ -3,9 +3,8 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<div>
-    <h1 class="ml-16 text-3xl">퀴즈</h1>
-    <div class="rounded-xl shadow-lg border-solid border-2 border-black h-64 w-1/2 text-3xl pl-4 pt-5 ml-96 mt-10 flex flex-col gap-2">
+<div class="pt-10">
+    <div class="rounded-xl shadow-lg border-solid border-2 border-black h-64 w-1/2 text-3xl pl-4 pt-5 ml-96 flex flex-col gap-2">
         <p>질문</p>
         <p >{{quiz.question}}</p>
         <p class="flex border-4 border-double border-blue-100 rounded-lg w-28 h-12 justify-center">{{quiz.points}}</p>
@@ -14,14 +13,12 @@
     <ol class="list-decimal">
         <div class = "grid gap-4 grid-cols-2 px-40">
             {% for answer in quiz.get_every_answers %}
-            <div class ="rounded-lg border-solid border-2 border-black h-24 w-full text-2xl pt-7 pl-20 transition ease-in-out delay-0 bg-white hover:bg-blue-50 duration-0">
-                <li>
             <a href="{% url 'quizs:check' quiz.pk answer.pk %}">
-                <div>
+                <div class ="rounded-lg border-solid border-2 border-black h-24 w-full text-2xl pt-7 pl-20 transition ease-in-out delay-0 bg-white hover:bg-blue-50 duration-0">
+                <li>
                     {{answer.context}}
                 </div>
             </a>
-        </div>
         {% endfor %}
     </div>
 </ol>

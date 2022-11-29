@@ -3,6 +3,7 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
+<div class="pt-16">
     <div class="border-4 border-solid border-black mx-96 rounded-xl text-center pb-20">
         
         <h1 class="font-bold text-4xl p-10">퀴즈 디테일</h1>
@@ -42,5 +43,6 @@
             <a href="{% url 'quizs:home' %}"><div class=" border-2 border-solid border-blue-700 px-5 py-1 mx-64 rounded mt-3 font-bold bg-blue-400 hover:bg-blue-700 hover:border-blue-400">완료</div></a>
         </div>
     </div>
+</div>
 
 {% endblock content %}
